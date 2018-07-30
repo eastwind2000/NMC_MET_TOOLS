@@ -33,7 +33,7 @@ import global_vars as gv
 
 #############################################
 
-cdate_utc = "2018062700"    # obs-valid time in UTC
+cdate_utc = "2018062900"    # obs-valid time in UTC
 
 cyear = cdate_utc[0:4]
 
@@ -83,10 +83,7 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
 # [4.2] Reading NWP-GFS forecast precipitation
 
 
-
-
 # [4.3] Reading NWP-GRAPES forecast precipitation
-
 
 
 
@@ -96,7 +93,7 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
 
 ## [6.1] Setting up products inventory
 
-desdir = "./result/ecmwf/" + cdate_utc
+desdir = gv.result_dir + "ecmwf/" + cdate_utc
 os.system("mkdir -p " + desdir)
 
 ## [6.2] Execute MET_TOOLS command
@@ -137,9 +134,5 @@ for vhr in arange(24, 12*9, 12):
     print(" =============================================  ")
 
 ############################################
-
-
-
-
 
 

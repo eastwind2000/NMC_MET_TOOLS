@@ -41,11 +41,11 @@
 
 ## 5 Experimental MODE verification products for ECMWF precipition forecast initialized on 2018062712UTC
 
-![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/ecmwf/mode_test-0.png)
-![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/ecmwf/mode_test-4.png)
-![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/ecmwf/mode_test-1.png)
-![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/ecmwf/mode_test-2.png)
-![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/ecmwf/mode_test-3.png)
+![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-0.png)
+![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-4.png)
+![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-1.png)
+![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-2.png)
+![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-3.png)
 
 ## 6 Experimetnal Rscript-generated figs from MET_TOOLS
 
@@ -92,4 +92,5 @@
 >    #To open a shell in the docker environment
 >
 >        docker exec -it metviewer_1 /bin/bash
->
+> - Still have bugs: can not linkup with MySQL - VSDB data.
+> 

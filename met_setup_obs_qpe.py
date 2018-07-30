@@ -11,13 +11,13 @@ import pdb
 
 # filename example: CMORPH_V0.x_RAW_0.25deg-DLY_00Z_20180607  means : 2018060708+24hr Precipitation
 
+
 # #下载QPE数据
 # [getSurfFileByTime]
 # userinfo=NMC_YBS_chentao/nmc2421
 # saveDir=G:/MUSIC/QPE/
 # dataCode=SURF_CMPA_RT_NC
 # times=20180716050000
-
 
 
 def setup_obs_qpe(cdate_utc):
