@@ -29,7 +29,7 @@ import global_vars as gv
 
 # [7] MODE EC/NCEP/...
 
-# [8] timecycle
+# [8] Timecycle
 
 #############################################
 
@@ -45,7 +45,7 @@ chour = cdate_utc[8:10]
 
 print(cyear + cmon + cday + chour)
 
-utcdate = datetime.datetime(int(cyear), int(cmon),int(cday), int(chour) )
+utcdate = datetime.datetime(int(cyear), int(cmon), int(cday), int(chour) )
 
 lstdate = utcdate + datetime.timedelta(hours=8)
 

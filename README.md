@@ -22,9 +22,10 @@
 - CMISS micaps r1jm data ?
 - CMISS QPE data
 - CMORPH QPE data from dss050.1
-> wget -c ftp://ftp.cpc.ncep.noaa.gov/precip/CMORPH_V0.x/RAW/0.25deg-DLY_00Z/2018/201806/CMORPH_V0.x_RAW_0.25deg-DLY_00Z_20180602.gz
+> Download single-file: wget -c ftp://ftp.cpc.ncep.noaa.gov/precip/CMORPH_V0.x/RAW/0.25deg-DLY_00Z/2018/201806/CMORPH_V0.x_RAW_0.25deg-DLY_00Z_20180602.gz
+> Download directory: wget -c -r -np -k -L -p ftp://ftp.cpc.ncep.noaa.gov/precip/CMORPH_V0.x/RAW/0.25deg-DLY_00Z/2018/201807/
 
-- (5) reforming to netcdf-format using ascii2nc by python-script
+- reforming QPE data to netcdf-format using ascii2nc by python-script
 
 ## 3 Setting-up precipitation forecast data from several models in NETCDF-format
 
