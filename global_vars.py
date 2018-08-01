@@ -37,3 +37,12 @@ nwp_satsimu_dir = ""
 
 result_dir = "../MET_RESULT/"
 
+
+gds_server = "10.32.8.164"
+
+gds_server_port = 8080
+
+
+
+
+

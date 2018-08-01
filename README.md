@@ -4,9 +4,9 @@
 # NMC-MET Verification Project
 
 - Provide basic verification products for station and gridding observation.
-- Provide Object-based space verifications products.
-- Experiments for realt-time operation in National Meteorological Center.
-- Python-based code.
+- Provide Object-Oriented space verifications products.
+- Experiments for real-time operation in National Meteorological Center.
+- Python-based project running on Linux-platform.
 
 ## 1  Setup  MET_TOOLS using docker-container or local-compiled programms
 
@@ -18,8 +18,8 @@
  
 ## 2 Setting-up observation data in NETCDF-format
 
-- Micaps r24-88 preciptattion data
-- CMISS micaps r1jm data ?
+- Micaps r24-88 precipitation data
+- CMISS Micaps r1jm data ?
 - CMISS QPE data
 - CMORPH QPE data from dss050.1
 > Download single-file: wget -c ftp://ftp.cpc.ncep.noaa.gov/precip/CMORPH_V0.x/RAW/0.25deg-DLY_00Z/2018/201806/CMORPH_V0.x_RAW_0.25deg-DLY_00Z_20180602.gz

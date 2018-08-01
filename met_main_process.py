@@ -7,7 +7,7 @@ import datetime
 
 import met_setup_obs_micaps
 
-import met_setup_ec_fcst
+from met_setup_fcst import *
 
 import met_setup_obs_qpe
 
@@ -78,12 +78,24 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
 
     print( " NWP_INIT:  "  +   cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc )
 
-    met_setup_ec_fcst.setup_ec_fcst  ( cdate_initnwp, vhr, cdate_utc )
+    setup_ec_fcst ( cdate_initnwp, vhr, cdate_utc )
 
 # [4.2] Reading NWP-GFS forecast precipitation
 
+for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
 
-# [4.3] Reading NWP-GRAPES forecast precipitation
+    initnwp_date = utcdate - datetime.timedelta(hours=vhr)
+
+    cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
+
+    print( " NWP_INIT:  "  +  cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc )
+
+    setup_gfs_fcst ( cdate_initnwp, vhr, cdate_utc )
+
+# pdb.set_trace()
+
+
+# [4.3] Reading GRAPES-9KM forecast precipitation
 
 
 
@@ -93,45 +105,51 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
 
 ## [6.1] Setting up products inventory
 
-desdir = gv.result_dir + "ecmwf/" + cdate_utc
-os.system("mkdir -p " + desdir)
 
-## [6.2] Execute MET_TOOLS command
+nwpfcst = ["ecmwf", "gfs"]
 
-m4_obs_file = gv.result_dir + "micaps" + "_r24_" + cdate_utc + ".nc"
+for model in nwpfcst:
 
-qpe_obs_file = gv.result_dir + "cpc_cmorph_china_" + cdate_utc  + ".nc"
+    desdir = gv.result_dir + model + "/" + cdate_utc
 
-for vhr in arange(24, 12*9, 12):
+    os.system("mkdir -p " + desdir)
 
-    initnwp_date = utcdate - datetime.timedelta(hours=vhr)
+    ## [6.2] Execute MET_TOOLS command
 
-    cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
+    m4_obs_file = gv.result_dir + "micaps" + "_r24_" + cdate_utc + ".nc"
 
-    fcst_file = gv.result_dir + "ecmwf_r24_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
+    qpe_obs_file = gv.result_dir + "cpc_cmorph_china_" + cdate_utc + ".nc"
 
-    ##################
+    for vhr in arange(24, 12 * 9, 12):
 
-    cmd= "point_stat " + fcst_file + " " + m4_obs_file + " config_pointstat_ecmwf.h "
-    print
-    print(cmd)
-    os.system( cmd )
-    os.system(" mv  point_stat_* " + desdir)
-    print( " =============================================  ")
+        initnwp_date = utcdate - datetime.timedelta(hours=vhr)
 
-    cmd = "mode " + fcst_file + " " + qpe_obs_file + " config_mode_ecmwf.h "
-    print
-    print(cmd)
-    os.system(cmd)
-    os.system(" mv  mode_* " + desdir)
-    print(" =============================================  ")
+        cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
 
-    cmd = "grid_stat " + fcst_file + " " + qpe_obs_file + " config_gridstat_ecmwf.h "
-    print
-    print(cmd)
-    os.system(cmd)
-    os.system(" mv  grid_stat* " + desdir)
-    print(" =============================================  ")
+        fcst_file = gv.result_dir + model + "_r24_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
+
+        ##################
+
+        cmd = "point_stat " + fcst_file + " " + m4_obs_file + " config_pointstat_" + model + ".h"
+        print
+        print(cmd)
+        os.system(cmd)
+        os.system(" mv  point_stat_* " + desdir)
+        print("="*40)
+
+        cmd = "mode " + fcst_file + " " + qpe_obs_file + " config_mode_" + model + ".h"
+        print
+        print(cmd)
+        os.system(cmd)
+        os.system(" mv  mode_* " + desdir)
+        print("="*40)
+
+        cmd = "grid_stat " + fcst_file + " " + qpe_obs_file + " config_gridstat_" + model + ".h"
+        print
+        print(cmd)
+        os.system(cmd)
+        os.system(" mv  grid_stat* " + desdir)
+        print("="*40)
 
 ############################################
 
