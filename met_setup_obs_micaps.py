@@ -96,9 +96,8 @@ def setup_data( cdate_utc, cdate_lst  ):
 
     f_ascii.close()
 
-    # step 3: writing data using grads format?
 
-    # step 4: writing data use NETCDF-format using  "ascii2nc" in MET_TOOLS
+    # step 3: writing data use NETCDF-format using  "ascii2nc" in MET_TOOLS
 
     print(" =================================== ")
     print
@@ -111,14 +110,8 @@ def setup_data( cdate_utc, cdate_lst  ):
     print(" =================================== ")
     print
 
+    # step 4: writing data using grads format?
+
+
     # pdb.set_trace()
-
-
-
-
-
-
-
-
-
 

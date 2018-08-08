@@ -104,7 +104,15 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 60, 72]
 
 nwpfcst = ["ecmwf", "gfs", "warms"]
 
+# nwpfcst = ["warms"]
+
 for model in nwpfcst:
+
+    if(model=="ecmwf" or model=="gfs"):
+        fcst_length = 12 * 9
+
+    if(model=="warms"):
+        fcst_length = 12 * 5
 
     desdir = gv.result_dir + model + "/" + cdate_utc
 
@@ -116,7 +124,7 @@ for model in nwpfcst:
 
     qpe_obs_file = gv.result_dir + "cpc_cmorph_china_" + cdate_utc + ".nc"
 
-    for vhr in arange(24, 12 * 9, 12):
+    for vhr in arange(24, fcst_length, 12):
 
         initnwp_date = utcdate - datetime.timedelta(hours=vhr)
 

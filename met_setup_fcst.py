@@ -13,7 +13,6 @@ import global_vars as gv
 
 import pdb
 
-
 def setup_warms_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-database
 
     tempvar = datetime.datetime(int(init_cdate[0:4]),
