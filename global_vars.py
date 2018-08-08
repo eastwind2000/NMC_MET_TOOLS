@@ -31,18 +31,19 @@ nwp_eceps_dir =      nwp_dir + "ecmfEnsemble/"
 
 nwp_grapes3km_dir =  nwp_dir + "mesoGRAPES3KM/"
 
-nwp_warms_dir =      nwp_dir + "mesoHUANANgrapes9KM/"
+nwp_warms_dir =      nwp_dir + "mesoSHANGHAI/"
+
+nwp_ramps_dir =      nwp_dir + "meso/"
 
 nwp_satsimu_dir = ""
 
 result_dir = "../MET_RESULT/"
 
+## Micaps GDS_DATA_SERVICE
 
 gds_server = "10.32.8.164"
 
 gds_server_port = 8080
-
-
 
 
 

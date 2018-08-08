@@ -14,7 +14,7 @@ import global_vars as gv
 import pdb
 
 
-def setup_g3km_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-database
+def setup_warms_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-database
 
     tempvar = datetime.datetime(int(init_cdate[0:4]),
                                 int(init_cdate[4:6]),
@@ -30,9 +30,9 @@ def setup_g3km_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-da
 
     valid_unixtime = time.mktime( tempvar.utctimetuple() )
 
-    fdir = gv.nwp_g3km_dir + init_cdate  + "/"
+    fdir = gv.nwp_warms_dir + init_cdate  + "/"
 
-    apcp24_fname = fdir + "g3km_IT_" + init_cdate      \
+    apcp24_fname = fdir + "mesoSHANGHAI_IT_" + init_cdate      \
                                  +   "_VT_" + valid_cdate     \
                                  +   "_FH_" + str(vhr).zfill(3)  +  "_AT_024.nc"
     print(apcp24_fname)
@@ -45,11 +45,6 @@ def setup_g3km_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-da
 
     tp = ncdata.variables["tp"][:][0, 0, :, :].data   # total precipitation masked-array
 
-    # pdb.set_trace()
-
-    # print(shape(lat))
-
-    # print(lon)
 
     nlat = len(lat)
 
@@ -64,12 +59,12 @@ def setup_g3km_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-da
     # contourf(tp.reshape((nlat, nlon)), cmap=cm.summer, levels=linspace(0, 300, 30))
     #
     # colorbar()
-    #
+
     # pdb.set_trace()
 
     #############################################################
 
-    s00 = "netcdf g3km_r24_" + init_cdate + "_f" + str(vhr).zfill(3)  +  " {" + "\n"
+    s00 = "netcdf warms_r24_" + init_cdate + "_f" + str(vhr).zfill(3)  +  " {" + "\n"
 
     s01 = "dimensions: " + "\n" + \
           " lat = 601; " + "\n" + \
@@ -100,7 +95,7 @@ def setup_g3km_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-da
 
     s03 = " // global attributes: " + "\n" + \
           " :_NCProperties = \"version=1|netcdflibversion=4.4.1.1\" ;" + "\n" + \
-          "	:FileOrigins = \"G3KM_HR_APCP24\" ; " + "\n" + \
+          "	:FileOrigins = \"WARMS_APCP24\" ; " + "\n" + \
           "	:MET_version = \"V7.0\" ;" + "\n" + \
           "	:Projection = \"LatLon\" ;" + "\n" + \
           "	:lat_ll = \"0.0 degrees_north\" ; " + "\n" + \
@@ -122,7 +117,7 @@ def setup_g3km_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-da
 
     #############################################################
 
-    im_ncfile = open("im_g3km_ncfile.cdl", "wb")
+    im_ncfile = open("im_warms_ncfile.cdl", "wb")
 
     im_ncfile.write(s00)
     im_ncfile.write(s01)
@@ -140,11 +135,11 @@ def setup_g3km_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-da
 
     ################################################
 
-    out_ncfile = gv.result_dir + "g3km_r24_" + init_cdate  + "_f" + str(vhr).zfill(3) + ".nc"
+    out_ncfile = gv.result_dir + "warms_r24_" + init_cdate  + "_f" + str(vhr).zfill(3) + ".nc"
 
     print
 
-    cmd = "ncgen  -o " + out_ncfile + "  im_g3km_ncfile.cdl "
+    cmd = "ncgen  -o " + out_ncfile + "  im_warms_ncfile.cdl "
     print(cmd)
     os.system(cmd)
 
@@ -153,10 +148,6 @@ def setup_g3km_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-da
     os.system(cmd)
 
     print
-
-
-
-
 
 
 
@@ -192,15 +183,6 @@ def setup_gfs_fcst(init_cdate, vhr, valid_cdate):
     lat = ncdata.variables["latitude"][:]  # masked array
 
     tp = ncdata.variables["tp"][:][0, 0, :, :].data   # total precipitation masked-array
-
-    # pdb.set_trace()
-
-    # print(shape(lat))
-
-    # print(lon)
-
-
-
 
     nlat = len(lat)
 

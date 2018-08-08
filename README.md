@@ -1,22 +1,22 @@
 
-# NMC_MET_TOOLS
+## NMC_MET_TOOLS
 
-# NMC-MET Verification Project
+### NMC-MET Verification Project
 
 - Provide basic verification products for station and gridding observation.
 - Provide Object-Oriented space verifications products.
 - Experiments for real-time operation in National Meteorological Center.
 - Python-based project running on Linux-platform.
 
-## 1  Setup  MET_TOOLS using docker-container or local-compiled programms
+### 1  Setup  MET_TOOLS using docker-container or local-compiled programms
 
-## main executable tools used from MET_TOOLS: 
+### main executable tools used from MET_TOOLS: 
   
 - POINT_STAT for station verification  
 - GRID_STAT for grid verification
 - MODE for object-based space verification  
  
-## 2 Setting-up observation data in NETCDF-format
+### 2 Setting-up observation data in NETCDF-format
 
 - Micaps r24-88 precipitation data
 - CMISS Micaps r1jm data ?
@@ -27,20 +27,21 @@
 
 - reforming QPE data to netcdf-format using ascii2nc by python-script
 
-## 3 Setting-up precipitation forecast data from several models in NETCDF-format
+### 3 Setting-up precipitation forecast data from several models in NETCDF-format
 
 - ECMWF
 - NCEP
 - GRAPES-GFS/MESO/3KM
 - WARMSII, RMAPES, etc
 
-## 4 Verification Products and post-progress
+### 4 Verification Products and post-progress
 
-- Key verification scores
+- Traditional verification scores
 - MODE-generated postscript files
+- Wavelet decomposition for grid-verification
 - Setting up met-viewer(plan)
 
-## 5 Experimental MODE verification products for ECMWF precipition forecast initialized on 2018062712UTC
+### 5 Experimental MODE verification products for ECMWF precipition forecast initialized on 2018062712UTC
 
 ![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-0.png)
 ![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-4.png)
@@ -48,7 +49,7 @@
 ![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-2.png)
 ![MODE_products](https://github.com/eastwind2000/NMC_MET_TOOLS/blob/master/result/mode_test-3.png)
 
-## 6 Experimetnal Rscript-generated figs from MET_TOOLS
+### 6 Experimetnal Rscript-generated figs from MET_TOOLS
 
 ![R](https://www.r-project.org/Rlogo.png)
 - Rscript plot_mpr.R   # for *mpr.txt 
@@ -60,7 +61,7 @@
 ![Rscript](https://raw.githubusercontent.com/eastwind2000/NMC_MET_TOOLS/master/R_script/mpr_plots-2.png)
 
 
-## 7 Setup met-viewer for MET_TOOLS output 
+### 7 Setup met-viewer for MET_TOOLS output 
 
 - setup met-viewer container
 

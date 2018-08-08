@@ -33,7 +33,7 @@ import global_vars as gv
 
 #############################################
 
-cdate_utc = "2018062900"    # obs-valid time in UTC
+cdate_utc = "2018072700"    # obs-valid time in UTC
 
 cyear = cdate_utc[0:4]
 
@@ -68,9 +68,13 @@ met_setup_obs_micaps.setup_data( cdate_utc, cdate_lst )
 met_setup_obs_qpe.setup_obs_qpe(cdate_utc)
 
 ######################################################
-# [4.1] Reading NWP-ECMWF forecast precipitation
 
-for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
+# [4.3]
+
+# pdb.set_trace()
+
+# [4.1]
+for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 60, 72]
 
     initnwp_date = utcdate - datetime.timedelta(hours=vhr)
 
@@ -78,26 +82,18 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
 
     print( " NWP_INIT:  "  +   cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc )
 
+    ## Reading NWP-ECMWF forecast precipitation
+
     setup_ec_fcst ( cdate_initnwp, vhr, cdate_utc )
 
-# [4.2] Reading NWP-GFS forecast precipitation
+    ## Reading NWP-GFS forecast precipitation
 
-for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
+    setup_gfs_fcst( cdate_initnwp, vhr, cdate_utc )
 
-    initnwp_date = utcdate - datetime.timedelta(hours=vhr)
+    ## Reading NWP-WARMS from ShangHai-WFO forecast precipitation
 
-    cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
-
-    print( " NWP_INIT:  "  +  cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc )
-
-    setup_gfs_fcst ( cdate_initnwp, vhr, cdate_utc )
-
-# pdb.set_trace()
-
-
-# [4.3] Reading GRAPES-9KM forecast precipitation
-
-
+    if ( vhr<=48 ):
+        setup_warms_fcst(cdate_initnwp, vhr, cdate_utc)
 
 ################ MET_EXEC ######################################
 
@@ -106,7 +102,7 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 72, 96]
 ## [6.1] Setting up products inventory
 
 
-nwpfcst = ["ecmwf", "gfs"]
+nwpfcst = ["ecmwf", "gfs", "warms"]
 
 for model in nwpfcst:
 
@@ -137,12 +133,6 @@ for model in nwpfcst:
         os.system(" mv  point_stat_* " + desdir)
         print("="*40)
 
-        cmd = "mode " + fcst_file + " " + qpe_obs_file + " config_mode_" + model + ".h"
-        print
-        print(cmd)
-        os.system(cmd)
-        os.system(" mv  mode_* " + desdir)
-        print("="*40)
 
         cmd = "grid_stat " + fcst_file + " " + qpe_obs_file + " config_gridstat_" + model + ".h"
         print
@@ -151,6 +141,22 @@ for model in nwpfcst:
         os.system(" mv  grid_stat* " + desdir)
         print("="*40)
 
-############################################
+        cmd = "mode " + fcst_file + " " + qpe_obs_file + " config_mode_" + model + ".h"
+        print
+        print(cmd)
+        os.system(cmd)
+        os.system(" mv  mode_* " + desdir)
+        print("=" * 40)
+
+        cmd = "wavelet_stat " + fcst_file + " " + qpe_obs_file + " config_wavelet_" + model + ".h"
+        print
+        print(cmd)
+        os.system(cmd)
+        os.system(" mv  wavelet_* " + desdir)
+        print("=" * 40)
+
+
+
+
 
 
