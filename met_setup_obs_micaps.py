@@ -15,6 +15,7 @@ import pdb
 
 # step 1: reading micaps diamond3 file
 
+
 def setup_data( cdate_utc, cdate_lst  ):
 
     # micaps_r24_dir = "H:\\fcst2018\\micaps\\r24\\"

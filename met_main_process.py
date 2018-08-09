@@ -55,8 +55,19 @@ print
 print(" =================================== ")
 print
 
+cmd =  "rm -r -f im_*.cdl"
+print(cmd)
+os.system(cmd)
+
+cmd =  "rm -r -f  *.stat"
+print(cmd)
+os.system(cmd)
+
+
+
 print( "  Time UTC  ==  " + cdate_utc  )
 print( "  Time LST  ==  " + cdate_lst  )
+
 
 ######################################################
 # [2.1] Readding micaps r24-88 file
@@ -67,6 +78,12 @@ met_setup_obs_micaps.setup_data( cdate_utc, cdate_lst )
 
 met_setup_obs_qpe.setup_obs_qpe(cdate_utc)
 
+
+m4_obs_file = gv.result_dir + "micaps" + "_r24_" + cdate_utc + ".nc"
+
+qpe_obs_file = gv.result_dir + "cpc_cmorph_china_" + cdate_utc + ".nc"
+
+
 ######################################################
 
 # [4.3]
@@ -74,7 +91,7 @@ met_setup_obs_qpe.setup_obs_qpe(cdate_utc)
 # pdb.set_trace()
 
 # [4.1]
-for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 60, 72]
+for vhr in arange(24, 12*3, 12):     # [24, 36, 48, 60, 72]
 
     initnwp_date = utcdate - datetime.timedelta(hours=vhr)
 
@@ -82,9 +99,10 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 60, 72]
 
     print( " NWP_INIT:  "  +   cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc )
 
+
     ## Reading NWP-ECMWF forecast precipitation
 
-    setup_ec_fcst ( cdate_initnwp, vhr, cdate_utc )
+    setup_ec_fcst(cdate_initnwp, vhr, cdate_utc)
 
     ## Reading NWP-GFS forecast precipitation
 
@@ -95,6 +113,12 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 60, 72]
     if ( vhr<=48 ):
         setup_warms_fcst(cdate_initnwp, vhr, cdate_utc)
 
+    ## setup ECMWF_EPS forecast precipitation
+
+    setup_eceps_fcst(cdate_initnwp, vhr, cdate_utc)
+
+
+
 ################ MET_EXEC ######################################
 
 # [6] MET_TOOLS for precipitation forecasting
@@ -102,13 +126,13 @@ for vhr in arange(24, 12*9, 12):     # [24, 36, 48, 60, 72]
 ## [6.1] Setting up products inventory
 
 
-nwpfcst = ["ecmwf", "gfs", "warms"]
 
-# nwpfcst = ["warms"]
+nwpfcst = ["ecmwf", "gfs", "warms", "eceps"]
+
 
 for model in nwpfcst:
 
-    if(model=="ecmwf" or model=="gfs"):
+    if(model=="ecmwf" or model=="gfs" or model=="eceps"):
         fcst_length = 12 * 9
 
     if(model=="warms"):
@@ -119,10 +143,6 @@ for model in nwpfcst:
     os.system("mkdir -p " + desdir)
 
     ## [6.2] Execute MET_TOOLS command
-
-    m4_obs_file = gv.result_dir + "micaps" + "_r24_" + cdate_utc + ".nc"
-
-    qpe_obs_file = gv.result_dir + "cpc_cmorph_china_" + cdate_utc + ".nc"
 
     for vhr in arange(24, fcst_length, 12):
 
@@ -154,17 +174,40 @@ for model in nwpfcst:
         print(cmd)
         os.system(cmd)
         os.system(" mv  mode_* " + desdir)
-        print("=" * 40)
+        # print("=" * 40)
 
-        cmd = "wavelet_stat " + fcst_file + " " + qpe_obs_file + " config_wavelet_" + model + ".h"
-        print
-        print(cmd)
-        os.system(cmd)
-        os.system(" mv  wavelet_* " + desdir)
-        print("=" * 40)
+        # cmd = "wavelet_stat " + fcst_file + " " + qpe_obs_file + " config_wavelet_" + model + ".h"
+        # print
+        # print(cmd)
+        # os.system(cmd)
+        # os.system(" mv  wavelet_* " + desdir)
+        # print("=" * 40)
 
+        if(model=="eceps"):
+            eps_fcst_files = "../MET_RESULT/eceps_r24_ens*_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
 
+            cmd = "ensemble_stat 51 " + eps_fcst_files                               \
+                                      + " config_ensemblestat_eceps.h "              \
+                                      + " -point_obs " + m4_obs_file
+            print(cmd)
+            os.system(cmd)
 
+            f1 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V.stat"
+            f2 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_ens.nc"
+            f3 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_orank.txt"
+            f4 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_phist.txt"
+            f5 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_relp.txt"
+            f6 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_rhist.txt"
+            f7 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_ssvar.txt"
+
+            for fx in [f1, f2, f3, f4, f5, f6, f7]:
+                ifx = fx[0:20] + str(vhr).zfill(3) + "F_" + fx[20::]
+                cmd = "mv " + fx + " " + ifx
+                print(cmd)
+                os.system(cmd)
+
+            os.system(" mv ensemble_stat_* " + desdir)
+            print("=" * 40)
 
 
 
