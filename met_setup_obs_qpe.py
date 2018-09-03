@@ -10,14 +10,14 @@ import global_vars as gv
 import pdb
 
 # filename example: CMORPH_V0.x_RAW_0.25deg-DLY_00Z_20180607  means : 2018060708+24hr Precipitation
-
-
+#
 # #下载QPE数据
 # [getSurfFileByTime]
 # userinfo=NMC_YBS_chentao/nmc2421
 # saveDir=G:/MUSIC/QPE/
 # dataCode=SURF_CMPA_RT_NC
 # times=20180716050000
+#
 
 
 def setup_obs_qpe(cdate_utc):
@@ -25,9 +25,9 @@ def setup_obs_qpe(cdate_utc):
     # cdate_utc = "2018062600"
 
     init_cdate = datetime.datetime(int( cdate_utc[0:4] ),
-                                int( cdate_utc[4:6] ),
-                                int( cdate_utc[6:8] ),
-                                int( cdate_utc[8:10]) ) - datetime.timedelta(hours=24)  ## very ticky, why use LST time !
+                                   int( cdate_utc[4:6] ),
+                                   int( cdate_utc[6:8] ),
+                                   int( cdate_utc[8:10]) ) - datetime.timedelta(hours=24)  ## very ticky, why use LST time !
 
     tempvar = init_cdate + datetime.timedelta(hours=8)
 
@@ -74,14 +74,14 @@ def setup_obs_qpe(cdate_utc):
     lon_china = lon[280:561]
     qpe_china = qpe[300:481, 280:561]
 
+    #
     # plt.contourf( apcp_china, cmap=cm.summer, levels=linspace(0,300,30) )
     # plt.title("CPC_CMORPH" )
     # plt.suptitle("")
     # plt.colorbar()
     # plt.show()
-
     # pdb.set_trace()
-
+    #
     ################################################################
 
     s00 = "netcdf QPE_CPC_CMORPH." + cdate_utc + "{" + "\n"
@@ -138,7 +138,9 @@ def setup_obs_qpe(cdate_utc):
 
     ##################################################
 
-    im_ncfile = open("im_qpe_ncfile.cdl", "wb")
+    im_ncfile_name = gv.result_dir + "im_qpe_ncfile.cdl"
+
+    im_ncfile = open(im_ncfile_name, "wb")
 
     im_ncfile.write(s00)
     im_ncfile.write(s01)
@@ -156,23 +158,17 @@ def setup_obs_qpe(cdate_utc):
 
     ################################################
 
-    out_ncfile = gv.result_dir + "cpc_cmorph_china_" + cdate_utc  + ".nc"  # pay attention!
+    out_ncfile_name = gv.result_dir + "cpc_cmorph_china_" + cdate_utc  + ".nc"  # pay attention!
 
     print
 
-    cmd = "ncgen  -o " + out_ncfile + "  im_qpe_ncfile.cdl "
+    cmd = "ncgen  -o " + out_ncfile_name + "  " + im_ncfile_name
     print(cmd)
     os.system(cmd)
 
-    cmd = "ncdump -h " + out_ncfile
+    cmd = "ncdump -h " + out_ncfile_name
     print(cmd)
     os.system(cmd)
 
     print
-
-
-
-
-
-
 

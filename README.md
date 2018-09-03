@@ -24,9 +24,11 @@
 - CMISS Micaps r1jm data ?
 - CMISS QPE data
 - CMORPH QPE data from dss050.1
-> Download single-file: wget -c ftp://ftp.cpc.ncep.noaa.gov/precip/CMORPH_V0.x/RAW/0.25deg-DLY_00Z/2018/201806/CMORPH_V0.x_RAW_0.25deg-DLY_00Z_20180602.gz
-> Download directory: wget -c -r -np -k -L -p ftp://ftp.cpc.ncep.noaa.gov/precip/CMORPH_V0.x/RAW/0.25deg-DLY_00Z/2018/201807/
-- reforming QPE data to netcdf-format using ascii2nc by python-script
+> Download single-file: 
+> wget -c ftp://ftp.cpc.ncep.noaa.gov/precip/CMORPH_V0.x/RAW/0.25deg-DLY_00Z/2018/201806/CMORPH_V0.x_RAW_0.25deg-DLY_00Z_20180602.gz
+> Download directory: 
+> wget -c -r -np -k -L -p ftp://ftp.cpc.ncep.noaa.gov/precip/CMORPH_V0.x/RAW/0.25deg-DLY_00Z/2018/201807/
+- reforming CMISS- or CMORPH- QPE data to NETCDF4-format using ascii2nc by python-script
 
 ### 3 Setting-up precipitation forecast data from several models in NETCDF-format
 
@@ -39,8 +41,9 @@
 ### 4 Verification Products and post-progress
 
 - Traditional verification scores
-- MODE-generated postscript files
+- MODE-generated postscript
 - Wavelet decomposition for grid-verification
+- Ensemble verification
 - Setting up met-viewer(plan)
 
 ### 5 Experimental MODE verification products for ECMWF precipition forecast initialized on 2018062712UTC
@@ -54,14 +57,14 @@
 ### 6 Experimetnal Rscript-generated figs from MET_TOOLS
 
 ![R](https://www.r-project.org/Rlogo.png)
-- Rscript plot_mpr.R   # for *mpr.txt 
-- Rscript plot_cnt.R   # for *_cnt*.txt *.stat
+
+- Rscript plot_mpr.R  # for *mpr.txt
+- Rscript plot_cnt.R  # for *_cnt*.txt *.stat
 - convert convert -density 300  mpr_plots.pdf mpr_plots.png  # format-transition using ImageMagick command-tools
 
 ![Rscript](https://raw.githubusercontent.com/eastwind2000/NMC_MET_TOOLS/master/R_script/mpr_plots-0.png)
 ![Rscript](https://raw.githubusercontent.com/eastwind2000/NMC_MET_TOOLS/master/R_script/mpr_plots-1.png)
 ![Rscript](https://raw.githubusercontent.com/eastwind2000/NMC_MET_TOOLS/master/R_script/mpr_plots-2.png)
-
 
 ### 7 Setup met-viewer for MET_TOOLS output 
 

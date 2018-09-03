@@ -46,7 +46,7 @@ def setup_data( cdate_utc, cdate_lst  ):
 
     f_ascii_name = gv.result_dir + "micaps" + "_r24_" + cdate_utc + ".ascii"
 
-    f_nc_name =    gv.result_dir +  "micaps" + "_r24_" + cdate_utc + ".nc"
+    f_nc_name = gv.result_dir + "micaps" + "_r24_" + cdate_utc + ".nc"
 
     print(f_ascii_name + " == > " + f_nc_name )
 

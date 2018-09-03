@@ -49,7 +49,7 @@ fcst = {
       {
         name       = "APCP_24";
         level      = [ "A24" ];
-        cat_thresh = [ >=0.1, >=1,  >=5.0, >=10.0, >=25.0, >=50.0, >=75.0,  >=100.0 ];
+        cat_thresh = [ >=0.1, >=1,  >=5.0, >=10.0, >=25.0, >=50.0, >=75.0,  >=100.0, >=150, >=200 ];
       }
 
      ];
@@ -64,7 +64,7 @@ obs = {
       {
         name       = "AccPrecip";
         level      = [ "Z2" ];
-        cat_thresh = [ >=0.1, >=1,  >=5.0, >=10.0, >=25.0, >=50.0, >=75.0,  >=100.0 ];
+        cat_thresh = [ >=0.1, >=1,  >=5.0, >=10.0, >=25.0, >=50.0, >=75.0,  >=100.0, >=150, >=200 ];
       }
 
      ];
@@ -187,8 +187,8 @@ output_flag = {
    fho    = BOTH;
    ctc    = BOTH;
    cts    = BOTH;
-   mctc   = NONE;
-   mcts   = NONE;
+   mctc   = BOTH;
+   mcts   = BOTH;
    cnt    = BOTH;
    sl1l2  = BOTH;
    sal1l2 = BOTH;

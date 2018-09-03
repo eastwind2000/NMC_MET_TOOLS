@@ -28,7 +28,7 @@ def setup_eceps_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
     tempvar = datetime.datetime(int( valid_cdate[0:4] ),
                                 int( valid_cdate[4:6] ),
                                 int( valid_cdate[6:8] ),
-                                int( valid_cdate[8:10]) ) + datetime.timedelta(hours=8)   ## very ticky, why use LST time !
+                                int( valid_cdate[8:10]) ) + datetime.timedelta(hours=8)   ## very ticky, why need to use LST time !
 
     valid_unixtime = time.mktime( tempvar.utctimetuple())
 
@@ -48,7 +48,6 @@ def setup_eceps_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
     nlat = len(lat)
 
     nlon = len(lon)
-
 
     tp = ncdata.variables["tp"][:, 0, 0, :, :].data  # total precipitation masked-array
 
@@ -121,7 +120,7 @@ def setup_eceps_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
 
         #############################################################
 
-        im_ncfname = "im_eceps" + "ens" + str(iens).zfill(2) +"_ncfile.cdl"
+        im_ncfname = gv.result_dir + "im_eceps" + "ens" + str(iens).zfill(2) +"_ncfile.cdl"
 
         im_ncfile = open(im_ncfname, "wb")
 
@@ -145,7 +144,7 @@ def setup_eceps_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
 
         print
 
-        cmd = "ncgen  -o " + out_ncfile +  " "  +  im_ncfname
+        cmd = "ncgen  -o " + out_ncfile + " " + im_ncfname
 
         print(cmd)
         os.system(cmd)
@@ -265,7 +264,9 @@ def setup_warms_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
 
     #############################################################
 
-    im_ncfile = open("im_warms_ncfile.cdl", "wb")
+    im_ncfile_name = gv.result_dir + "im_warms_ncfile.cdl"
+
+    im_ncfile = open(im_ncfile_name, "wb")
 
     im_ncfile.write(s00)
     im_ncfile.write(s01)
@@ -283,15 +284,15 @@ def setup_warms_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
 
     ################################################
 
-    out_ncfile = gv.result_dir + "warms_r24_" + init_cdate  + "_f" + str(vhr).zfill(3) + ".nc"
+    out_ncfile_name = gv.result_dir + "warms_r24_" + init_cdate  + "_f" + str(vhr).zfill(3) + ".nc"
 
     print
 
-    cmd = "ncgen  -o " + out_ncfile + "  im_warms_ncfile.cdl "
+    cmd = "ncgen  -o " + out_ncfile_name + " " + im_ncfile_name
     print(cmd)
     os.system(cmd)
 
-    cmd = "ncdump -h " + out_ncfile
+    cmd = "ncdump -h " + out_ncfile_name
     print(cmd)
     os.system(cmd)
 
@@ -404,7 +405,9 @@ def setup_gfs_fcst(init_cdate, vhr, valid_cdate):
 
     #############################################################
 
-    im_ncfile = open("im_gfs_ncfile.cdl", "wb")
+    im_ncfile_name = gv.result_dir + "im_gfs_ncfile.cdl"
+
+    im_ncfile = open(im_ncfile_name, "wb")
 
     im_ncfile.write(s00)
     im_ncfile.write(s01)
@@ -422,15 +425,15 @@ def setup_gfs_fcst(init_cdate, vhr, valid_cdate):
 
     ################################################
 
-    out_ncfile = gv.result_dir + "gfs_r24_" + init_cdate  + "_f" + str(vhr).zfill(3) + ".nc"
+    out_ncfile_name = gv.result_dir + "gfs_r24_" + init_cdate + "_f" + str(vhr).zfill(3) + ".nc"
 
     print
 
-    cmd = "ncgen  -o " + out_ncfile + "  im_gfs_ncfile.cdl "
+    cmd = "ncgen  -o " + out_ncfile_name + " " + im_ncfile_name
     print(cmd)
     os.system(cmd)
 
-    cmd = "ncdump -h " + out_ncfile
+    cmd = "ncdump -h " + out_ncfile_name
     print(cmd)
     os.system(cmd)
 
@@ -555,7 +558,9 @@ def setup_ec_fcst(init_cdate, vhr, valid_cdate):
 
     #############################################################
 
-    im_ncfile = open("im_ec_ncfile.cdl", "wb")
+    im_ncfile_name = gv.result_dir + "im_ec_ncfile.cdl"
+
+    im_ncfile = open(im_ncfile_name, "wb")
 
     im_ncfile.write(s00)
     im_ncfile.write(s01)
@@ -573,25 +578,15 @@ def setup_ec_fcst(init_cdate, vhr, valid_cdate):
 
     ################################################
 
-    out_ncfile = gv.result_dir + "ecmwf_r24_" + init_cdate  + "_f" + str(vhr).zfill(3) + ".nc"
+    out_ncfile_name = gv.result_dir + "ecmwf_r24_" + init_cdate + "_f" + str(vhr).zfill(3) + ".nc"
 
     print
-
-    cmd = "ncgen  -o " + out_ncfile + "  im_ec_ncfile.cdl "
+    cmd = "ncgen  -o " + out_ncfile_name + " " + im_ncfile_name
     print(cmd)
     os.system(cmd)
 
-    cmd = "ncdump -h " + out_ncfile
+    cmd = "ncdump -h " + out_ncfile_name
     print(cmd)
     # os.system(cmd)
 
     print
-
-
-
-
-
-
-
-
-

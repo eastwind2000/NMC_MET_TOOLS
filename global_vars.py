@@ -2,7 +2,7 @@
 
 # micaps_r24_dir = "H:\\fcst2018\\micaps\\r24\\"
 
-micaps_r24_dir = "../micaps/r24/"
+micaps_r24_dir = "../database/micaps/r24/"
 
 qpe_dir = "../database/QPE/"
 
@@ -38,6 +38,9 @@ nwp_ramps_dir =      nwp_dir + "meso/"
 nwp_satsimu_dir = ""
 
 result_dir = "../MET_RESULT/"
+
+tempdir = "./temp/"
+
 
 ## Micaps GDS_DATA_SERVICE
 

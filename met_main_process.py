@@ -33,7 +33,7 @@ import global_vars as gv
 
 #############################################
 
-cdate_utc = "2018072700"    # obs-valid time in UTC
+cdate_utc = "2018062500"    # obs-valid intercepting time in UTC
 
 cyear = cdate_utc[0:4]
 
@@ -55,17 +55,17 @@ print
 print(" =================================== ")
 print
 
-cmd =  "rm -r -f im_*.cdl"
+cmd =  "rm -r -f " + gv.result_dir + "im_*.cdl"
 print(cmd)
 os.system(cmd)
 
-cmd =  "rm -r -f  *.stat"
-print(cmd)
-os.system(cmd)
-
+# cmd =  "rm -r -f  "+ gv.tempdir +  "*.stat"
+# print(cmd)
+# os.system(cmd)
 
 
 print( "  Time UTC  ==  " + cdate_utc  )
+
 print( "  Time LST  ==  " + cdate_lst  )
 
 
@@ -91,14 +91,14 @@ qpe_obs_file = gv.result_dir + "cpc_cmorph_china_" + cdate_utc + ".nc"
 # pdb.set_trace()
 
 # [4.1]
-for vhr in arange(24, 12*3, 12):     # [24, 36, 48, 60, 72]
+
+for vhr in arange(24, 12*8, 12):     # [24, 36, 48, 60, 72, 84]
 
     initnwp_date = utcdate - datetime.timedelta(hours=vhr)
 
     cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
 
     print( " NWP_INIT:  "  +   cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc )
-
 
     ## Reading NWP-ECMWF forecast precipitation
 
@@ -118,27 +118,23 @@ for vhr in arange(24, 12*3, 12):     # [24, 36, 48, 60, 72]
     setup_eceps_fcst(cdate_initnwp, vhr, cdate_utc)
 
 
-
 ################ MET_EXEC ######################################
 
-# [6] MET_TOOLS for precipitation forecasting
+# [6] call MET_TOOLS commands for precipitation verification
 
 ## [6.1] Setting up products inventory
 
-
-
 nwpfcst = ["ecmwf", "gfs", "warms", "eceps"]
-
 
 for model in nwpfcst:
 
     if(model=="ecmwf" or model=="gfs" or model=="eceps"):
-        fcst_length = 12 * 9
+        fcst_length = 12 * 8
 
     if(model=="warms"):
         fcst_length = 12 * 5
 
-    desdir = gv.result_dir + model + "/" + cdate_utc
+    desdir = gv.result_dir + model + "/" + cdate_utc + "/"
 
     os.system("mkdir -p " + desdir)
 
@@ -154,26 +150,33 @@ for model in nwpfcst:
 
         ##################
 
-        cmd = "point_stat " + fcst_file + " " + m4_obs_file + " config_pointstat_" + model + ".h"
+        cmd = "point_stat " + fcst_file + " " + m4_obs_file \
+                            + " config_pointstat_" + model + ".h"  \
+                            + " -outdir " + desdir
+
         print
         print(cmd)
         os.system(cmd)
-        os.system(" mv  point_stat_* " + desdir)
+        # os.system(" mv  " + gv.tempdir + "point_stat_* " + desdir)
         print("="*40)
 
 
-        cmd = "grid_stat " + fcst_file + " " + qpe_obs_file + " config_gridstat_" + model + ".h"
+        cmd = "grid_stat " + fcst_file + " " + qpe_obs_file \
+                           + " config_gridstat_" + model + ".h" \
+                           + " -outdir " + desdir
         print
         print(cmd)
         os.system(cmd)
-        os.system(" mv  grid_stat* " + desdir)
+        # os.system(" mv  grid_stat* " + desdir)
         print("="*40)
 
-        cmd = "mode " + fcst_file + " " + qpe_obs_file + " config_mode_" + model + ".h"
+        cmd = "mode " + fcst_file + " " + qpe_obs_file \
+                      + " config_mode_" + model + ".h"  \
+                      + " -outdir " + desdir
         print
         print(cmd)
         os.system(cmd)
-        os.system(" mv  mode_* " + desdir)
+        # os.system(" mv  mode_* " + desdir)
         # print("=" * 40)
 
         # cmd = "wavelet_stat " + fcst_file + " " + qpe_obs_file + " config_wavelet_" + model + ".h"
@@ -183,31 +186,31 @@ for model in nwpfcst:
         # os.system(" mv  wavelet_* " + desdir)
         # print("=" * 40)
 
+        # pdb.set_trace()
+
         if(model=="eceps"):
             eps_fcst_files = "../MET_RESULT/eceps_r24_ens*_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
 
             cmd = "ensemble_stat 51 " + eps_fcst_files                               \
                                       + " config_ensemblestat_eceps.h "              \
-                                      + " -point_obs " + m4_obs_file
+                                      + " -point_obs " + m4_obs_file                 \
+                                      + " -outdir " + desdir
             print(cmd)
             os.system(cmd)
 
-            f1 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V.stat"
-            f2 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_ens.nc"
-            f3 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_orank.txt"
-            f4 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_phist.txt"
-            f5 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_relp.txt"
-            f6 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_rhist.txt"
-            f7 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10]+ "0000V_ssvar.txt"
+            f1 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V.stat"
+            f2 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_ens.nc"
+            f3 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_orank.txt"
+            f4 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_phist.txt"
+            f5 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_relp.txt"
+            f6 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_rhist.txt"
+            f7 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_ssvar.txt"
 
             for fx in [f1, f2, f3, f4, f5, f6, f7]:
                 ifx = fx[0:20] + str(vhr).zfill(3) + "F_" + fx[20::]
-                cmd = "mv " + fx + " " + ifx
+                cmd = "mv " + desdir + fx + " " + desdir + ifx
                 print(cmd)
                 os.system(cmd)
 
-            os.system(" mv ensemble_stat_* " + desdir)
+            # os.system(" mv ensemble_stat_* " + desdir)
             print("=" * 40)
-
-
-
