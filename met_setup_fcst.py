@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from pylab import *
 
 import os
@@ -9,10 +10,9 @@ import datetime
 
 from netCDF4 import Dataset
 
-import global_vars as gv
+import global_vars_linux as gv
 
 import pdb
-
 
 def setup_eceps_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-database
 
@@ -149,16 +149,18 @@ def setup_eceps_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
         print(cmd)
         os.system(cmd)
 
-        cmd = "ncdump -h " + out_ncfile
-        print(cmd)
-        os.system(cmd)
+        # cmd = "ncdump -h " + out_ncfile
+        # print(cmd)
+        # os.system(cmd)
 
         print
 
     print("#"*40)
 
 
+
 ########################################################################################################################
+
 
 
 def setup_warms_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-database
@@ -184,7 +186,11 @@ def setup_warms_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
                                  +   "_FH_" + str(vhr).zfill(3)  +  "_AT_024.nc"
     print(apcp24_fname)
 
-    ncdata = Dataset(apcp24_fname, "r")
+    try:
+        ncdata = Dataset(apcp24_fname, "r")
+    except:
+        print( " File " + apcp24_fname + " error!" )
+        return
 
     lon = ncdata.variables["longitude"][:]  # masked array difference under windows & linux
 
@@ -292,9 +298,9 @@ def setup_warms_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
     print(cmd)
     os.system(cmd)
 
-    cmd = "ncdump -h " + out_ncfile_name
-    print(cmd)
-    os.system(cmd)
+    # cmd = "ncdump -h " + out_ncfile_name
+    # print(cmd)
+    # os.system(cmd)
 
     print
 
@@ -433,9 +439,9 @@ def setup_gfs_fcst(init_cdate, vhr, valid_cdate):
     print(cmd)
     os.system(cmd)
 
-    cmd = "ncdump -h " + out_ncfile_name
-    print(cmd)
-    os.system(cmd)
+    # cmd = "ncdump -h " + out_ncfile_name
+    # print(cmd)
+    # os.system(cmd)
 
     print
 
@@ -566,12 +572,10 @@ def setup_ec_fcst(init_cdate, vhr, valid_cdate):
     im_ncfile.write(s01)
     im_ncfile.write(s02)
     im_ncfile.write(s03)
-
     im_ncfile.write(s04)
     im_ncfile.write(s05)
     im_ncfile.write(s06)
     im_ncfile.write(s07)
-
     im_ncfile.write(s0x)
 
     im_ncfile.close()
@@ -585,8 +589,8 @@ def setup_ec_fcst(init_cdate, vhr, valid_cdate):
     print(cmd)
     os.system(cmd)
 
-    cmd = "ncdump -h " + out_ncfile_name
-    print(cmd)
+    # cmd = "ncdump -h " + out_ncfile_name
+    # print(cmd)
     # os.system(cmd)
 
     print

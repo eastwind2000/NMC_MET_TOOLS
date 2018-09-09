@@ -5,7 +5,7 @@ import os
 
 import datetime, time
 
-import global_vars as gv
+import global_vars_linux as gv
 
 import pdb
 
@@ -19,8 +19,7 @@ import pdb
 # times=20180716050000
 #
 
-
-def setup_obs_qpe(cdate_utc):
+def setup_cmorph_qpe(cdate_utc):
 
     # cdate_utc = "2018062600"
 

@@ -42,6 +42,7 @@ wind_logic    = UNION;
 //
 // Forecast and observation fields to be verified
 //
+
 fcst = {
    message_type = ["ADPSFC", "ADPUPA" ];
 
@@ -49,7 +50,7 @@ fcst = {
       {
         name       = "APCP_24";
         level      = [ "A24" ];
-        cat_thresh = [ >=0.1, >=1,  >=5.0, >=10.0, >=25.0, >=50.0, >=75.0,  >=100.0 ];
+        cat_thresh = [ >=0.1, >=1,  >=5.0, >=10.0, >=25.0, >=50.0, >=75.0,  >=100.0,  >=150.0,  >=200.0 ];
       }
 
      ];
@@ -64,7 +65,7 @@ obs = {
       {
         name       = "AccPrecip";
         level      = [ "Z2" ];
-        cat_thresh = [ >=0.1, >=1,  >=5.0, >=10.0, >=25.0, >=50.0, >=75.0,  >=100.0 ];
+        cat_thresh = [ >=0.1, >=1,  >=5.0, >=10.0, >=25.0, >=50.0, >=75.0,  >=100.0,  >=150.0,  >=200.0 ];
       }
 
      ];
