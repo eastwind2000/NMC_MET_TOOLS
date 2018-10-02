@@ -33,36 +33,56 @@ from global_vars_linux import *
 
 # [8] Timecycle
 
-
 #############################################
 
  # obs-valid intercepting time in UTC
 
-cdate_utc_list = ["2018071400",
-                  "2018071500",
-                  "2018071600",
-                  "2018071700",
-                  "2018071800",
-                  "2018071900",
-                  "2018072000",
-                  "2018072100",
-                  "2018072200",
-                  "2018072300",
-                  "2018072400",
-                  "2018072500",
-                  "2018072600",
-                  "2018072700",
-                  "2018072800",
-                  "2018072900",
-                  "2018073000",
-                  "2018073100" ]
+# cdate_utc_list = ["2018061300",
+#                   "2018061400",
+#                   "2018061500",
+#                   "2018061600",
+#                   "2018061700",
+#                   "2018061800",
+#                   "2018061900",
+#                   "2018062000",
+#                   "2018062100",
+#                   "2018062200",
+#                   "2018062300",
+#                   "2018062400",
+#                   "2018062500",
+#                   "2018062600",
+#                   "2018062700",
+#                   "2018062800",
+#                   "2018062900",
+#                   "2018063000",
+#                   "2018070100"]
+
+
+cdate_utc_list = ['']*365
+
+cdate_start = "2018092000"
+
+cdate_end   = "2018092500"
+
+cyear = cdate_start[0:4]
+cmon = cdate_start[4:6]
+cday = cdate_start[6:8]
+chour= cdate_start[8:10]
+
+t1 = datetime.datetime(int(cyear), int(cmon), int(cday), int(chour))
+
+# create cdate list
+
+for iday in range(365):
+
+    t2 = t1 + datetime.timedelta(hours=24*iday)
+
+    cdate_utc_list[iday] = t2.strftime("%Y%m%d%H")
+
+    print(cdate_utc_list[iday])
 
 
 for cdate_utc in cdate_utc_list:
-
-    # met_postproc(cdate_utc)
-    #
-    # pdb.set_trace()
 
     cyear = cdate_utc[0:4]
 
@@ -256,10 +276,8 @@ for cdate_utc in cdate_utc_list:
 
     # [7.0] Setting up MET_postproc
 
-    met_postproc(cdate_utc)  # post_progress for met output
+    met_postproc_poinstat(cdate_utc)  # post_progress for met output
 
-    #
-    #
 
 
 

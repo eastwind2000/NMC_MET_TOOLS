@@ -2,13 +2,13 @@
 
 # micaps_r24_dir = "H:\\fcst2018\\micaps\\r24\\"
 
-proj_home = "/home/vgdisk02/fcst2018/NMC_MET_TOOLS/"
+proj_home = "/home/lse/vgdisk02/fcst2018/NMC_MET_TOOLS/"
 
-nwp_dir = "/home/vgdisk02/nwp_database/"
+nwp_dir = "/home/lse/vgdisk02/nwp_database/"
 
-micaps_r24_dir = proj_home + "../database/micaps/r24/"
+micaps_r24_dir = proj_home + "../obs_database/micaps/r24/"
 
-qpe_dir = proj_home + "../database/QPE/"
+qpe_dir = proj_home + "../obs_database/QPE_CMORPH/"
 
 #
 # qpe_dir = "H:\\fcst2018\cmorph\\ftp.cpc.ncep.noaa.gov\\precip\\CMORPH_V1.0\\RAW\\0.25deg-DLY_00Z\\"
@@ -44,7 +44,7 @@ tempdir = proj_home + "./temp/"
 
 use_ecmwf = True
 
-use_eceps = False
+use_eceps = True
 
 use_gfs = True
 

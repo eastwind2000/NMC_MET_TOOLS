@@ -11,9 +11,40 @@ import pdb
 
 from global_vars_linux import *
 
-# def met_postproc( init_cdate, vhr, valid_cdate):
 
-def met_postproc(cdate_utc):
+#############################################################
+
+
+
+
+
+def met_postproc_gridstat(cdate_utc):    # post-progressing for grid_stat verification products
+
+
+
+
+    return
+
+
+#############################################################
+
+
+def met_postproc_mode(cdate_utc):  # post-progressing for MODE verification products, especially for the Postscript figs.
+
+
+
+    return
+
+#############################################################
+
+
+
+
+
+#############################################################
+
+
+def met_postproc_poinstat(cdate_utc):
 
     # cdate_utc = "2018062500"
 
@@ -53,7 +84,7 @@ def met_postproc(cdate_utc):
             print("#" * 40)
 
             print
-            print("#"*15 + " MET Postprogress " + "#"*15)
+            print("#"*15 + " MET Postprogress CSI" + "#"*15)
             print
 
             init_cdate = cdate_initnwp
@@ -71,7 +102,11 @@ def met_postproc(cdate_utc):
 
             print(f_ps_name)
 
-            ps_data = pd.read_csv(f_ps_name, sep="\s+", na_values="NA")
+            try:
+                ps_data = pd.read_csv(f_ps_name, sep="\s+", na_values="NA")
+            except:
+                print( " File " + f_ps_name + " Error !")
+                return
 
             scores = ["ACC", "FBIAS", "PODY", "POFD", "FAR", "CSI", "GSS", "HSS"]
 
@@ -88,7 +123,6 @@ def met_postproc(cdate_utc):
             #     tabledata[irow, :] = [ round(x, 3) for x in ps_data[scores][0:10]]
             #
             #     irow = irow + 1
-
 
             fig, ax = plt.subplots(2, 1)
 

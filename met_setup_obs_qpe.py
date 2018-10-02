@@ -19,6 +19,18 @@ import pdb
 # times=20180716050000
 #
 
+# Z:\diamond\qpe\024h\18091808.000
+
+def setup_micaps_qpe(cdate_utc):
+
+    databufr = file("18091808.000", "r").readlines()[2:]
+
+    pdb.set_trace()
+
+    return
+
+###################################################################################
+
 def setup_cmorph_qpe(cdate_utc):
 
     # cdate_utc = "2018062600"

@@ -23,7 +23,11 @@ def setup_micaps_r24obs( cdate_utc, cdate_lst  ):
     print("  Reading Micaps r24-precipitation file : " + gv.micaps_r24_dir + r24fname )
     print
 
-    r24obs = open(gv.micaps_r24_dir + r24fname).readlines()[11:]   # pay attention to global_vars
+    try:
+        r24obs = open(gv.micaps_r24_dir + r24fname).readlines()[11:]   # pay attention to global_vars
+    except:
+        print( " File gv.micaps_r24_dir + r24fname " + "Error !")
+        return
 
     nobs = len(r24obs)
 
