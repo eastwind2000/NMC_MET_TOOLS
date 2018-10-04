@@ -60,7 +60,7 @@ from global_vars_linux import *
 
 cdate_utc_list = ['']*365
 
-cdate_start = "2018092000"
+cdate_start = "2018091500"
 
 cdate_end   = "2018092500"
 
@@ -98,7 +98,7 @@ for cdate_utc in cdate_utc_list:
 
     lstdate = utcdate + datetime.timedelta(hours=8)
 
-    cdate_lst = lstdate.strftime("%Y%m%d%H")  # obs-valid time in lST-Beijing
+    cdate_lst = lstdate.strftime("%Y%m%d%H")  # obs-valid time in LST-Beijing
 
     print
     print(" =================================== ")
@@ -133,11 +133,15 @@ for cdate_utc in cdate_utc_list:
 
     # [2.2] Readding CMORPH QPE
 
-    setup_cmorph_qpe(cdate_utc)
+    # setup_cmorph_qpe(cdate_utc)
+
+    setup_qpe5km_nmic(cdate_utc)
 
     m4_obs_file = result_dir + "micaps" + "_r24_" + cdate_utc + ".nc"
 
-    qpe_obs_file = result_dir + "cpc_cmorph_china_" + cdate_utc + ".nc"
+    # qpe_obs_file = result_dir + "cpc_cmorph_china_" + cdate_utc + ".nc"
+
+    qpe_obs_file = result_dir + "qpe5km_nmic_" + cdate_utc + ".nc"
 
     ######################################################
 
@@ -206,10 +210,6 @@ for cdate_utc in cdate_utc_list:
             cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
 
             fcst_file = result_dir + model + "_r24_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
-
-            # met_postproc(cdate_initnwp, vhr, cdate_utc)  # post_progress for met output
-
-            # pdb.set_trace()
 
             ##################
 

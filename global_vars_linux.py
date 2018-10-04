@@ -8,7 +8,9 @@ nwp_dir = "/home/lse/vgdisk02/nwp_database/"
 
 micaps_r24_dir = proj_home + "../obs_database/micaps/r24/"
 
-qpe_dir = proj_home + "../obs_database/QPE_CMORPH/"
+qpe_cmorph_dir = proj_home + "../obs_database/QPE_CMORPH/"
+
+qpe_nmic_dir = proj_home + "../obs_database/qpe_nmic/024h/"
 
 #
 # qpe_dir = "H:\\fcst2018\cmorph\\ftp.cpc.ncep.noaa.gov\\precip\\CMORPH_V1.0\\RAW\\0.25deg-DLY_00Z\\"
@@ -44,7 +46,7 @@ tempdir = proj_home + "./temp/"
 
 use_ecmwf = True
 
-use_eceps = True
+use_eceps = False
 
 use_gfs = True
 
