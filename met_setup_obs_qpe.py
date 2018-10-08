@@ -63,7 +63,13 @@ def setup_qpe5km_nmic(cdate_utc):
 
     # databufr = file(gv.qpe_nmic_dir + "2018091908.000", "r").readlines()[2:]
 
-    tmpdata = file(gv.qpe_nmic_dir + cdate_lst + ".000", "r").readlines()[2:]
+    print(" QPE5KM_NMIC_024H: " + gv.qpe_nmic_dir + cdate_lst + ".000")
+
+    try:
+        tmpdata = file(gv.qpe_nmic_dir + cdate_lst + ".000", "r").readlines()[2:]
+    except:
+        print("Reading QPE5KM File: Error" + cdate_lst + ".000")
+        return
 
     databufr = " ".join(tmpdata).split()
 

@@ -13,7 +13,6 @@ from multiprocessing import Process
 
 # pb2nc. /gfsobs/gfs_2018062000.adpsfc.bufr_d.nr   sfcobs_test.nc   config_pb2nc
 
-
 def wgetdata(cmd):
     print(cmd)
     os.system(cmd)

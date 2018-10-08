@@ -31,6 +31,78 @@ def met_postproc_gridstat(cdate_utc):    # post-progressing for grid_stat verifi
 
 def met_postproc_mode(cdate_utc):  # post-progressing for MODE verification products, especially for the Postscript figs.
 
+#    MET_RESULT/ecmwf/2017050100/mode_EC_CMORPH_720000L_20170501_000000V_240000A_R6_T6.ps
+
+    # cdate_utc = "2018062500"
+
+    cyear = cdate_utc[0:4]
+
+    cmon = cdate_utc[4:6]
+
+    cday = cdate_utc[6:8]
+
+    chour = cdate_utc[8:10]
+
+    print(cyear + cmon + cday + chour)
+
+    utcdate = datetime.datetime(int(cyear), int(cmon), int(cday), int(chour))
+
+    # lstdate = utcdate + datetime.timedelta(hours=8)
+
+    print
+    print(" =================================== ")
+    print
+
+    for model_name in model_dir:
+
+        fcst_length = model_fcst_length[model_name] # fcstlength in dictionay model_fcst_length
+
+        for vhr in arange(24, fcst_length+12, 12):  # [24, 36, 48, 60, 72, 84]
+
+            initnwp_date = utcdate - datetime.timedelta(hours=vhr)
+
+            cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
+
+            print("#" * 40)
+            print(" MET_PostProc_MODE :  " + cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc)
+            print("#" * 40)
+
+            for kth in range(8):  # every
+
+                mode_ps_fname = result_dir + model_name + "/" + cdate_utc + "/" +  \
+                                "mode_" + mode_prefix[model_name] + "_" + str(vhr) + "0000L_" +  \
+                                cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_240000A_" \
+                                + "R" + str(kth+1) + "_T" + str(kth+1) + ".ps"
+
+                mode_png_00p = result_dir + model_name + "/" + cdate_utc + "/" + \
+                                 "mode_" + mode_prefix[model_name] + "_" + str(vhr).zfill(3) + "_" + \
+                                cdate_utc + "_RT_" + str(kth).zfill(2) + "_00p" + ".png"
+
+                mode_png_04p = result_dir + model_name + "/" + cdate_utc + "/" + \
+                               "mode_" + mode_prefix[model_name] + "_" + str(vhr).zfill(3) + "_" + \
+                                cdate_utc + "_RT_" + str(kth).zfill(2) + "_01p" + ".png"
+
+                mode_png_des = result_dir + model_name + "/" + cdate_utc + "/" + \
+                               "mode_" + mode_prefix[model_name] + "_" + str(vhr).zfill(3) + "_" + \
+                                cdate_utc + "_RT_" + str(kth).zfill(2) + "_fin" + ".png"
+
+                cmd = "convert -density 240 " + mode_ps_fname + "[0] " + mode_png_00p + " ; " + \
+                      "convert -density 240 " + mode_ps_fname + "[4] " + mode_png_04p + " ; " + \
+                      "convert -append " + mode_png_00p  + " "+ mode_png_04p + " " + mode_png_des
+
+                print(cmd)
+
+                os.system(cmd)
+
+                # print(mode_ps_fname)
+                # print(mode_png_fname)
+
+
+
+
+
+
+
 
 
     return
@@ -80,7 +152,7 @@ def met_postproc_poinstat(cdate_utc):
             cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
 
             print("#" * 40)
-            print(" MET_PostProc :  " + cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc)
+            print(" MET_PostProc_pointstat :  " + cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc)
             print("#" * 40)
 
             print

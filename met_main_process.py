@@ -60,14 +60,18 @@ from global_vars_linux import *
 
 cdate_utc_list = ['']*365
 
-cdate_start = "2018091500"
+cdate_start = "2017051400"
 
-cdate_end   = "2018092500"
+cdate_end   = "2017090100"
 
 cyear = cdate_start[0:4]
 cmon = cdate_start[4:6]
 cday = cdate_start[6:8]
 chour= cdate_start[8:10]
+
+
+
+# pdb.set_trace()
 
 t1 = datetime.datetime(int(cyear), int(cmon), int(cday), int(chour))
 
@@ -145,98 +149,70 @@ for cdate_utc in cdate_utc_list:
 
     ######################################################
 
-    # [4.3]
-
-    # pdb.set_trace()
-
     # [4.1]
 
-    for vhr in arange(24, 12 * 8, 12):  # [24, 36, 48, 60, 72, 84]
+    for model_name in model_dir:
 
-        initnwp_date = utcdate - datetime.timedelta(hours=vhr)
+        fcst_length = model_fcst_length[model_name]
 
-        cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
-
-        print(" NWP_INIT:  " + cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc)
-
-        ## Reading NWP-ECMWF forecast precipitation
-
-        if (use_ecmwf):
-            setup_ec_fcst(cdate_initnwp, vhr, cdate_utc)
-
-        ## Reading NWP-GFS forecast precipitation
-
-        if (use_gfs):
-            setup_gfs_fcst(cdate_initnwp, vhr, cdate_utc)
-
-        ## Reading NWP-WARMS from ShangHai-WFO forecast precipitation
-
-        if (use_warms and vhr <= 48):
-            setup_warms_fcst(cdate_initnwp, vhr, cdate_utc)
-
-        ## setup ECMWF_EPS forecast precipitation
-
-        if (use_eceps):
-            setup_eceps_fcst(cdate_initnwp, vhr, cdate_utc)
-
-    ################ MET_EXEC ######################################
-
-    # [6] call MET_TOOLS commands for precipitation verification
-
-    ## [6.1] Setting up products inventory
-
-    # nwpfcst = ["ecmwf", "gfs", "warms", "eceps"]
-
-    nwpfcst = ["ecmwf", "gfs", "warms"]
-
-    for model in nwpfcst:
-
-        if (model == "ecmwf" or model == "gfs" or model == "eceps"):
-            fcst_length = 12 * 8
-
-        if (model == "warms"):
-            fcst_length = 12 * 5
-
-        desdir = result_dir + model + "/" + cdate_utc + "/"
+        desdir = result_dir + model_name + "/" + cdate_utc + "/"
 
         os.system("mkdir -p " + desdir)
 
-        ## [6.2] Execute MET_TOOLS command
-
-        for vhr in arange(24, fcst_length, 12):
+        for vhr in arange(24, fcst_length + 12, 12):  # [24, 36, 48, 60, 72, 84]
 
             initnwp_date = utcdate - datetime.timedelta(hours=vhr)
 
             cdate_initnwp = initnwp_date.strftime("%Y%m%d%H")  # nwp-mode inittime
 
-            fcst_file = result_dir + model + "_r24_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
+            print(" NWP_INIT:  " + cdate_initnwp + " ==> + " + str(vhr) + "H  " + cdate_utc)
 
-            ##################
+            ## Reading NWP-ECMWF forecast precipitation
 
-            cmd = "point_stat " + fcst_file + " " + m4_obs_file \
-                  + " config_pointstat_" + model + ".h" \
-                  + " -outdir " + desdir
+            if (model_name == "ecmwf"):
+                setup_ec_fcst(cdate_initnwp, vhr, cdate_utc)
+
+            ## Reading NWP-GFS forecast precipitation
+
+            if (model_name == "gfs"):
+                setup_gfs_fcst(cdate_initnwp, vhr, cdate_utc)
+
+            ## Reading NWP-WARMS from ShangHai-WFO forecast precipitation
+
+            if (model_name == "warms"):
+                setup_warms_fcst(cdate_initnwp, vhr, cdate_utc)
+
+            ## setup ECMWF_EPS forecast precipitation
+
+            if (model_name == "eceps"):
+                setup_eceps_fcst(cdate_initnwp, vhr, cdate_utc)
+
+            fcst_file = result_dir + model_name + "_r24_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
+
+            ################ MET_EXEC ######################################
+
+            # [6] call MET_TOOLS commands for precipitation verification
+
+            cmd = "point_stat " + fcst_file + " " + m4_obs_file  + \
+                                 " config_pointstat_" + model_name + ".h" + " -outdir " + desdir
 
             print
             print(cmd)
             os.system(cmd)
             print("=" * 40)
 
-            cmd = "grid_stat " + fcst_file + " " + qpe_obs_file \
-                  + " config_gridstat_" + model + ".h" \
-                  + " -outdir " + desdir
+            cmd = "grid_stat " + fcst_file + " " + qpe_obs_file + \
+                     " config_gridstat_" + model_name + ".h" +  " -outdir " + desdir
             print
-            print(cmd)
-            os.system(cmd)
-            # os.system(" mv  grid_stat* " + desdir)
+            # print(cmd)
+            # os.system(cmd)
             print("=" * 40)
 
             cmd = "mode " + fcst_file + " " + qpe_obs_file \
-                  + " config_mode_" + model + ".h" \
-                  + " -outdir " + desdir
+                  + " config_mode_" + model_name + ".h" + " -outdir " + desdir
             print
-            print(cmd)
-            os.system(cmd)
+            # print(cmd)
+            # os.system(cmd)
 
             # print("=" * 40)
             # cmd = "wavelet_stat " + fcst_file + " " + qpe_obs_file + " config_wavelet_" + model + ".h"
@@ -246,7 +222,7 @@ for cdate_utc in cdate_utc_list:
             # os.system(" mv  wavelet_* " + desdir)
             # print("=" * 40)
 
-            if (model == "eceps"):
+            if (model_name == "eceps"):
                 eps_fcst_files = "../MET_RESULT/eceps_r24_ens*_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
 
                 cmd = "ensemble_stat 51 " + eps_fcst_files \
@@ -278,9 +254,4 @@ for cdate_utc in cdate_utc_list:
 
     met_postproc_poinstat(cdate_utc)  # post_progress for met output
 
-
-
-
-
-
-
+    # met_postproc_mode(cdate_utc)
