@@ -15,6 +15,13 @@ from met_setup_obs_qpe import *
 
 from global_vars_linux import *
 
+from multiprocessing import Process
+
+
+def met_cmd_exec( cmd  ):
+    os.system(cmd)
+
+
 #
 
 # [1] Setting up obs-validate, basic variants
@@ -57,10 +64,9 @@ from global_vars_linux import *
 #                   "2018063000",
 #                   "2018070100"]
 
+cdate_utc_list = ['']*120
 
-cdate_utc_list = ['']*365
-
-cdate_start = "2017051400"
+cdate_start = "2018070500"
 
 cdate_end   = "2017090100"
 
@@ -69,22 +75,19 @@ cmon = cdate_start[4:6]
 cday = cdate_start[6:8]
 chour= cdate_start[8:10]
 
-
-
 # pdb.set_trace()
 
 t1 = datetime.datetime(int(cyear), int(cmon), int(cday), int(chour))
 
 # create cdate list
 
-for iday in range(365):
+for iday in range(5):
 
     t2 = t1 + datetime.timedelta(hours=24*iday)
 
     cdate_utc_list[iday] = t2.strftime("%Y%m%d%H")
 
     print(cdate_utc_list[iday])
-
 
 for cdate_utc in cdate_utc_list:
 
@@ -170,7 +173,7 @@ for cdate_utc in cdate_utc_list:
             ## Reading NWP-ECMWF forecast precipitation
 
             if (model_name == "ecmwf"):
-                setup_ec_fcst(cdate_initnwp, vhr, cdate_utc)
+                setup_ecmwf_fcst(cdate_initnwp, vhr, cdate_utc)
 
             ## Reading NWP-GFS forecast precipitation
 
@@ -187,32 +190,47 @@ for cdate_utc in cdate_utc_list:
             if (model_name == "eceps"):
                 setup_eceps_fcst(cdate_initnwp, vhr, cdate_utc)
 
+            if (model_name == "pwafs15"):
+                setup_pwafs15_fcst(cdate_initnwp, vhr, cdate_utc)
+                # pdb.set_trace()
+
+            if (model_name == "pwafs03"):
+                setup_pwafs03_fcst(cdate_initnwp, vhr, cdate_utc)
+                # pdb.set_trace()
+
             fcst_file = result_dir + model_name + "_r24_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
 
             ################ MET_EXEC ######################################
 
             # [6] call MET_TOOLS commands for precipitation verification
 
+
             cmd = "point_stat " + fcst_file + " " + m4_obs_file  + \
                                  " config_pointstat_" + model_name + ".h" + " -outdir " + desdir
-
             print
             print(cmd)
-            os.system(cmd)
+
+            # pdb.set_trace()
+            px = Process(target=met_cmd_exec, args=(cmd, ))
+            px.start()
             print("=" * 40)
+
 
             cmd = "grid_stat " + fcst_file + " " + qpe_obs_file + \
                      " config_gridstat_" + model_name + ".h" +  " -outdir " + desdir
             print
-            # print(cmd)
-            # os.system(cmd)
+            print(cmd)
+            px = Process(target=met_cmd_exec, args=(cmd,))
+            px.start()
             print("=" * 40)
+
 
             cmd = "mode " + fcst_file + " " + qpe_obs_file \
                   + " config_mode_" + model_name + ".h" + " -outdir " + desdir
             print
-            # print(cmd)
-            # os.system(cmd)
+            print(cmd)
+            px = Process(target=met_cmd_exec, args=(cmd, ))
+            px.start()
 
             # print("=" * 40)
             # cmd = "wavelet_stat " + fcst_file + " " + qpe_obs_file + " config_wavelet_" + model + ".h"
@@ -225,12 +243,11 @@ for cdate_utc in cdate_utc_list:
             if (model_name == "eceps"):
                 eps_fcst_files = "../MET_RESULT/eceps_r24_ens*_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
 
-                cmd = "ensemble_stat 51 " + eps_fcst_files \
-                      + " config_ensemblestat_eceps.h " \
-                      + " -point_obs " + m4_obs_file \
-                      + " -outdir " + desdir
+                cmd = "ensemble_stat 51 " + eps_fcst_files  + " config_ensemblestat_eceps.h " \
+                      + " -point_obs " + m4_obs_file  + " -outdir " + desdir
                 print(cmd)
-                os.system(cmd)
+                px = Process(target=met_cmd_exec, args=(cmd,))
+                px.start()
 
                 f1 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V.stat"
                 f2 = "ensemble_stat_ECEPS_" + cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_ens.nc"
@@ -248,6 +265,15 @@ for cdate_utc in cdate_utc_list:
 
                 print("=" * 40)
 
+
+
+        px.join()
+
+        print( "Process Start: " + model_name + str(vhr))
+
+
+
+
     ###############################################
 
     # [7.0] Setting up MET_postproc
@@ -255,3 +281,5 @@ for cdate_utc in cdate_utc_list:
     met_postproc_poinstat(cdate_utc)  # post_progress for met output
 
     # met_postproc_mode(cdate_utc)
+
+

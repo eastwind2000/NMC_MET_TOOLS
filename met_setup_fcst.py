@@ -13,6 +13,315 @@ import global_vars_linux as gv
 
 import pdb
 
+
+######################################################################################
+######################################################################################
+
+
+def setup_pwafs15_fcst(init_cdate, vhr, valid_cdate):
+
+    ny = 321
+
+    nx = 561
+
+    tempvar = datetime.datetime(int(init_cdate[0:4]),
+                                int(init_cdate[4:6]),
+                                int(init_cdate[6:8]),
+                                int(init_cdate[8:10]) ) + datetime.timedelta(hours=8)    ## very tricky, why use LST time !
+
+    init_unixtime = time.mktime( tempvar.utctimetuple() )      ## change to unix-time-stample
+
+    tempvar = datetime.datetime(int( valid_cdate[0:4] ),
+                                int( valid_cdate[4:6] ),
+                                int( valid_cdate[6:8] ),
+                                int( valid_cdate[8:10]) ) + datetime.timedelta(hours=8)   ## very ticky, why use LST time !
+
+    valid_unixtime = time.mktime( tempvar.utctimetuple() )
+
+    fdir = gv.nwp_pwafs_dir + init_cdate + "/"
+
+    apcp24_fname = fdir + "pwafs15_r24_init" + init_cdate + "_f" + str(vhr).zfill(3) + ".grd"
+
+    print(apcp24_fname)
+
+    try:
+        ncdata = np.fromfile(apcp24_fname, dtype=float32, count=4*ny*nx).reshape(ny, nx)
+    except:
+        print(" File " + apcp24_fname + " error!")
+        return
+
+    # pdb.set_trace()
+
+    lat = linspace(15, 55, ny)
+
+    lon = linspace(70, 140, nx)
+
+    tp = ncdata   # total precipitation masked-array
+
+    nlat = ny
+
+    nlon = nx
+
+    print(["shape of TP in ncfiles  : ",  shape(tp)])
+
+    ########################### draw temperoy figure ############
+
+    # figure(1)
+    #
+    # contourf(tp.reshape((nlat, nlon)), cmap=cm.summer, levels=linspace(0, 300, 30))
+    #
+    # colorbar()
+    #
+    # plt.savefig("test_pwafs15.png")
+    #
+    # plt.close()
+    #
+    #
+    # pdb.set_trace()
+
+    #############################################################
+
+    s00 = "netcdf pwafs15_r24_" + init_cdate + "_f" + str(vhr).zfill(3)  +  " {" + "\n"
+
+    s01 = "dimensions: " + "\n" + \
+          " lat = 321; " + "\n" + \
+          " lon = 561; " + "\n"
+
+    s02 = "variables:  "                                                                                        + "\n" + \
+          "float lat(lat) ; "                                                                                   + "\n" + \
+          "   lat:long_name = \"latitude\" ;"                                                                   + "\n" + \
+          "   lat:units = \"degrees_north\" ;"                                                                  + "\n" + \
+          "   lat:standard_name = \"latitude\" ;"                                                               + "\n" + \
+          "float lon(lon) ;"                                                                                    + "\n" + \
+          "   lon:long_name = \"longitude\" ;"                                                                  + "\n" + \
+          "   lon:units = \"degrees_east\" ;"                                                                   + "\n" + \
+          "   lon:standard_name = \"longitude\" ;"                                                              + "\n" + \
+          "float APCP_24(lat, lon) ;"                                                                           + "\n" + \
+          "   APCP_24:name = \"APCP_24\" ;"                                                                     + "\n" + \
+          "   APCP_24:long_name = \"Total Precipitation\" ;"                                                    + "\n" + \
+          "   APCP_24:level = \"A24\" ;"                                                                        + "\n" + \
+          "   APCP_24:units = \"kg/m^2\" ;"                                                                     + "\n" + \
+          "   APCP_24:_FillValue = -9999.f ;"                                                                   + "\n" + \
+          "   APCP_24:init_time = \""  + init_cdate[0:8]+"_"+ init_cdate[8:10] + "0000" +  "\" ;"               + "\n" + \
+          "   APCP_24:init_time_ut = \"" + str(init_unixtime) + "\" ;"                                          + "\n" + \
+          "   APCP_24:valid_time = \"" + valid_cdate[0:8]+ "_"+ valid_cdate[8:10] +"0000"  + "\" ;"             + "\n" + \
+          "   APCP_24:valid_time_ut = \"" +  str(valid_unixtime) + "\" ;"                                       + "\n" + \
+          "   APCP_24:accum_time = \"240000\" ;"                                                                + "\n" + \
+          "   APCP_24:_FillValue = 65535 ;"                                                                     + "\n" + \
+          "   APCP_24:accum_time_sec = 86400 ;"                                                                 + "\n"
+
+    s03 = " // global attributes: " + "\n" + \
+          " :_NCProperties = \"version=1|netcdflibversion=4.4.1.1\" ;" + "\n" + \
+          "	:FileOrigins = \"PWAFS15_APCP24\" ; " + "\n" + \
+          "	:MET_version = \"V7.0\" ;" + "\n" + \
+          "	:Projection = \"LatLon\" ;" + "\n" + \
+          "	:lat_ll = \"15.0 degrees_north\" ; " + "\n" + \
+          "	:lon_ll = \"70.0 degrees_east\" ; " + "\n" + \
+          "	:delta_lat = \"0.125 degrees\" ;" + "\n" + \
+          "	:delta_lon = \"0.125 degrees\" ;" + "\n" + \
+          "	:Nlat = \"" + str(nlat) + " grid_points\" ; " + "\n" + \
+          "	:Nlon = \"" + str(nlon) + " grid_points\" ; " + "\n"
+
+    s04 = "data:" + "\n"
+
+    s05 = "lat = " + ",".join(str(item) for item in lat) + ";\n"
+
+    s06 = "lon = " + ",".join(str(item) for item in lon) + ";\n"
+
+    s07 = "APCP_24 = " + ",".join(str(item) for item in tp.flatten()) + ";\n"
+
+    s0x = " } \n"
+
+    #############################################################
+
+    im_ncfile_name = gv.result_dir + "im_pwafs15_ncfile.cdl"
+
+    im_ncfile = open(im_ncfile_name, "wb")
+
+    im_ncfile.write(s00)
+    im_ncfile.write(s01)
+    im_ncfile.write(s02)
+    im_ncfile.write(s03)
+
+    im_ncfile.write(s04)
+    im_ncfile.write(s05)
+    im_ncfile.write(s06)
+    im_ncfile.write(s07)
+
+    im_ncfile.write(s0x)
+
+    im_ncfile.close()
+
+    ################################################
+
+    out_ncfile_name = gv.result_dir + "pwafs15_r24_" + init_cdate  + "_f" + str(vhr).zfill(3) + ".nc"
+
+    print
+
+    cmd = "ncgen  -o " + out_ncfile_name + " " + im_ncfile_name
+    print(cmd)
+    os.system(cmd)
+
+    # cmd = "ncdump -h " + out_ncfile_name
+    # print(cmd)
+    # os.system(cmd)
+
+    return
+
+
+def setup_pwafs03_fcst(init_cdate, vhr, valid_cdate):
+
+    ny = 801
+
+    nx = 921
+
+    tempvar = datetime.datetime(int(init_cdate[0:4]),
+                                int(init_cdate[4:6]),
+                                int(init_cdate[6:8]),
+                                int(init_cdate[8:10]) ) + datetime.timedelta(hours=8)    ## very tricky, why use LST time !
+
+    init_unixtime = time.mktime( tempvar.utctimetuple() )      ## change to unix-time-stample
+
+    tempvar = datetime.datetime(int( valid_cdate[0:4] ),
+                                int( valid_cdate[4:6] ),
+                                int( valid_cdate[6:8] ),
+                                int( valid_cdate[8:10]) ) + datetime.timedelta(hours=8)   ## very ticky, why use LST time !
+
+    valid_unixtime = time.mktime( tempvar.utctimetuple() )
+
+    fdir = gv.nwp_pwafs_dir + init_cdate + "/"
+
+    apcp24_fname = fdir + "pwafs03_r24_init" + init_cdate + "_f" + str(vhr).zfill(3) + ".grd"
+
+    print(apcp24_fname)
+
+    try:
+        ncdata = np.fromfile(apcp24_fname, dtype=float32, count=4*ny*nx).reshape(ny, nx)
+    except:
+        print(" File " + apcp24_fname + " error!")
+        return
+
+    # pdb.set_trace()
+
+    lat = linspace(22, 42, ny)
+
+    lon = linspace(102, 125, nx)
+
+    tp = ncdata   # total precipitation masked-array
+
+    nlat = ny
+
+    nlon = nx
+
+    print(["shape of TP in ncfiles  : ",  shape(tp)])
+
+    ########################### draw temperoy figure ############
+    #
+    # figure(1)
+    #
+    # contourf(tp.reshape((nlat, nlon)), cmap=cm.summer, levels=linspace(0, 300, 30))
+    #
+    # colorbar()
+    #
+    # plt.savefig("test_pwafs.png")
+    #
+    # plt.close()
+
+
+    # pdb.set_trace()
+
+    #############################################################
+
+    s00 = "netcdf pwafs03_r24_" + init_cdate + "_f" + str(vhr).zfill(3)  +  " {" + "\n"
+
+    s01 = "dimensions: " + "\n" + \
+          " lat = 801; " + "\n" + \
+          " lon = 921; " + "\n"
+
+    s02 = "variables:  "                                                                                        + "\n" + \
+          "float lat(lat) ; "                                                                                   + "\n" + \
+          "   lat:long_name = \"latitude\" ;"                                                                   + "\n" + \
+          "   lat:units = \"degrees_north\" ;"                                                                  + "\n" + \
+          "   lat:standard_name = \"latitude\" ;"                                                               + "\n" + \
+          "float lon(lon) ;"                                                                                    + "\n" + \
+          "   lon:long_name = \"longitude\" ;"                                                                  + "\n" + \
+          "   lon:units = \"degrees_east\" ;"                                                                   + "\n" + \
+          "   lon:standard_name = \"longitude\" ;"                                                              + "\n" + \
+          "float APCP_24(lat, lon) ;"                                                                           + "\n" + \
+          "   APCP_24:name = \"APCP_24\" ;"                                                                     + "\n" + \
+          "   APCP_24:long_name = \"Total Precipitation\" ;"                                                    + "\n" + \
+          "   APCP_24:level = \"A24\" ;"                                                                        + "\n" + \
+          "   APCP_24:units = \"kg/m^2\" ;"                                                                     + "\n" + \
+          "   APCP_24:_FillValue = -9999.f ;"                                                                   + "\n" + \
+          "   APCP_24:init_time = \""  + init_cdate[0:8]+"_"+ init_cdate[8:10] + "0000" +  "\" ;"               + "\n" + \
+          "   APCP_24:init_time_ut = \"" + str(init_unixtime) + "\" ;"                                          + "\n" + \
+          "   APCP_24:valid_time = \"" + valid_cdate[0:8]+ "_"+ valid_cdate[8:10] +"0000"  + "\" ;"             + "\n" + \
+          "   APCP_24:valid_time_ut = \"" +  str(valid_unixtime) + "\" ;"                                       + "\n" + \
+          "   APCP_24:accum_time = \"240000\" ;"                                                                + "\n" + \
+          "   APCP_24:_FillValue = 65535 ;"                                                                     + "\n" + \
+          "   APCP_24:accum_time_sec = 86400 ;"                                                                 + "\n"
+
+    s03 = " // global attributes: " + "\n" + \
+          " :_NCProperties = \"version=1|netcdflibversion=4.4.1.1\" ;" + "\n" + \
+          "	:FileOrigins = \"PWAFS_APCP24\" ; " + "\n" + \
+          "	:MET_version = \"V7.0\" ;" + "\n" + \
+          "	:Projection = \"LatLon\" ;" + "\n" + \
+          "	:lat_ll = \"22.0 degrees_north\" ; " + "\n" + \
+          "	:lon_ll = \"102.0 degrees_east\" ; " + "\n" + \
+          "	:delta_lat = \"0.025 degrees\" ;" + "\n" + \
+          "	:delta_lon = \"0.025 degrees\" ;" + "\n" + \
+          "	:Nlat = \"" + str(nlat) + " grid_points\" ; " + "\n" + \
+          "	:Nlon = \"" + str(nlon) + " grid_points\" ; " + "\n"
+
+    s04 = "data:" + "\n"
+
+    s05 = "lat = " + ",".join(str(item) for item in lat) + ";\n"
+
+    s06 = "lon = " + ",".join(str(item) for item in lon) + ";\n"
+
+    s07 = "APCP_24 = " + ",".join(str(item) for item in tp.flatten()) + ";\n"
+
+    s0x = " } \n"
+
+    #############################################################
+
+    im_ncfile_name = gv.result_dir + "im_pwafs03_ncfile.cdl"
+
+    im_ncfile = open(im_ncfile_name, "wb")
+
+    im_ncfile.write(s00)
+    im_ncfile.write(s01)
+    im_ncfile.write(s02)
+    im_ncfile.write(s03)
+
+    im_ncfile.write(s04)
+    im_ncfile.write(s05)
+    im_ncfile.write(s06)
+    im_ncfile.write(s07)
+
+    im_ncfile.write(s0x)
+
+    im_ncfile.close()
+
+    ################################################
+
+    out_ncfile_name = gv.result_dir + "pwafs03_r24_" + init_cdate  + "_f" + str(vhr).zfill(3) + ".nc"
+
+    print
+
+    cmd = "ncgen  -o " + out_ncfile_name + " " + im_ncfile_name
+    print(cmd)
+    os.system(cmd)
+
+    # cmd = "ncdump -h " + out_ncfile_name
+    # print(cmd)
+    # os.system(cmd)
+
+    return
+
+######################################################################################
+######################################################################################
+
 def setup_eceps_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-database
 
     nens = 51
@@ -301,7 +610,7 @@ def setup_warms_fcst(init_cdate, vhr, valid_cdate):  # datafile error from nwp-d
     # print(cmd)
     # os.system(cmd)
 
-    print
+    return
 
 
 ########################################################################################################################
@@ -453,7 +762,7 @@ def setup_gfs_fcst(init_cdate, vhr, valid_cdate):
 
 
 
-def setup_ec_fcst(init_cdate, vhr, valid_cdate):
+def setup_ecmwf_fcst(init_cdate, vhr, valid_cdate):
 
     # nlat = 601
     # nlon = 701

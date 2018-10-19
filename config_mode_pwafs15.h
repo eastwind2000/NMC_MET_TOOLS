@@ -9,12 +9,12 @@
 //
 // Output model name to be written
 //
-model = "GFS";
+model = "PWAFS15";
 
 //
 // Output description to be written
 //
-desc = "GFS_CMORPH";
+desc = "PWAFS15_CMORPH";
 
 //
 // Output observation type to be written
@@ -58,8 +58,8 @@ fcst = {
 
    censor_thresh     = [];
    censor_val        = [];
-   conv_radius       = [   80/grid_res,  60/grid_res,  60/grid_res, 30/grid_res, 30/grid_res   ];
-   conv_thresh       = [   >=5,              >=10,      >=25.0,           >=50,      >=100 ];
+   conv_radius       = [   80/grid_res,  60/grid_res,  60/grid_res, 30/grid_res, 30/grid_res  ];
+   conv_thresh       = [ >=5, >=10,  >=25.0, >=50, >=100 ];
    vld_thresh        = 0.5;
    area_thresh       = >=10.0;
    inten_perc_value  = 100;
@@ -240,7 +240,7 @@ shift_right = 0;   //  grid squares
 
 ////////////////////////////////////////////////////////////////////////////////
 
-output_prefix  = "GFS_CMORPH";
+output_prefix  = "PWAFS15_CMORPH";
 version        = "V7.0";
 
 ////////////////////////////////////////////////////////////////////////////////

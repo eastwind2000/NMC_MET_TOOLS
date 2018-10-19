@@ -9,17 +9,20 @@
 //
 // Output model name to be written
 //
+
 model = "GFS";
 
 //
 // Output description to be written
 // May be set separately in each "obs.field" entry
 //
+
 desc = "NA";
 
 //
 // Output observation type to be written
 //
+
 obtype = "QPE";
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -28,6 +31,7 @@ obtype = "QPE";
 // Verification grid
 // May be set separately in each "field" entry
 //
+
 regrid = {
    to_grid    = OBS;
    method     = NEAREST;
@@ -49,6 +53,7 @@ censor_val    = [];
 //
 // Forecast and observation fields to be verified
 //
+
 fcst = {
    field = [
       {
@@ -58,6 +63,8 @@ fcst = {
       }
    ];
 }
+
+
 obs = {
    field = [
       {

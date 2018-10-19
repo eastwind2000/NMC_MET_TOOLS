@@ -129,13 +129,13 @@ ps_plot_flag  = TRUE;
 met_data_dir = "MET_BASE";
 
 fcst_raw_plot = {
-   color_table = "MET_BASE/colortables/met_default.ctable";
+   color_table = "MET_BASE/colortables/wrf_precip2.ctable;
    plot_min = 0.0;
    plot_max = 0.0;
 }
 
 obs_raw_plot = {
-   color_table = "MET_BASE/colortables/met_default.ctable";
+   color_table = "MET_BASE/colortables/wrf_precip2.ctable";
    plot_min = 0.0;
    plot_max = 0.0;
 }

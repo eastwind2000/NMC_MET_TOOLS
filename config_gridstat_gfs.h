@@ -29,8 +29,8 @@ obtype = "CPC_CMORPH";
 //
 regrid = {
    to_grid    = OBS;
-   method     = NEAREST;
-   width      = 1;
+   method     = BLlIN;
+   width      = 2;
    vld_thresh = 0.5;
    shape      = SQUARE;
 }
@@ -82,7 +82,7 @@ obs = {
 // Verification masking regions
 //
 mask = {
-   grid = [ "FULL" ];
+//   grid = [ "FULL" ];
    poly = [  "China_boundary.poly" ];
         }
 

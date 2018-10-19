@@ -9,7 +9,7 @@
 //
 // Output model name to be written
 //
-model = "ECMWF";
+model = "PWAFS15";
 
 //
 // Output description to be written
@@ -64,7 +64,6 @@ fcst = {
    ];
 
 }
-
 obs = {
 
    field = [
@@ -190,7 +189,7 @@ nc_pairs_flag   = {
 grid_weight_flag = NONE;
 rank_corr_flag   = FALSE;
 tmp_dir          = "/tmp";
-output_prefix    = "EC_CMORPH";
+output_prefix    = "PWAFS15_CMORPH";
 version          = "V7.0";
 
 ////////////////////////////////////////////////////////////////////////////////

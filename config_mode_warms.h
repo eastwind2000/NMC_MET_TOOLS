@@ -38,7 +38,7 @@ regrid = {
 //
 // Approximate grid resolution (km)
 //
-grid_res = 15;
+grid_res = 5;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -58,14 +58,14 @@ fcst = {
 
    censor_thresh     = [];
    censor_val        = [];
-   conv_radius       = [   10,   5,    4,    4,      3,    3,    2,    2  ];
-   conv_thresh       = [>=0.1, >=5, >=10, >=15, >=25.0, >=50, >=75, >=100 ];
+   conv_radius       = [   80/grid_res,  60/grid_res,  60/grid_res, 30/grid_res, 30/grid_res    ];
+   conv_thresh       = [ >=5,  >=10, >=25.0, >=50, >=100 ];
    vld_thresh        = 0.5;
    area_thresh       = >=10.0;
    inten_perc_value  = 100;
    inten_perc_thresh = >=0.0;
    merge_thresh      = >=1.25;
-   merge_flag        = NONE;
+   merge_flag        = ENGINE;
 }
 
 obs = fcst;
@@ -90,7 +90,7 @@ match_flag = MERGE_BOTH;
 //
 // Maximum centroid distance for objects to be compared
 //
-max_centroid_dist = 800.0/grid_res;
+max_centroid_dist = 600.0/grid_res;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -191,17 +191,17 @@ print_interest_thresh = 0.0;
 met_data_dir = "MET_BASE";
 
 fcst_raw_plot = {
-   color_table      = "MET_BASE/colortables/met_default.ctable";
-   plot_min         = 0.0;
-   plot_max         = 0.0;
-   colorbar_spacing = 1;
+   color_table      = "MET_BASE/colortables/wrf_precip2.ctable";
+   plot_min         = 0.1;
+   plot_max         = 250.0;
+   colorbar_spacing = 10;
 }
 
 obs_raw_plot = {
-   color_table      = "MET_BASE/colortables/met_default.ctable";
-   plot_min         = 0.0;
-   plot_max         = 0.0;
-   colorbar_spacing = 1;
+   color_table      = "MET_BASE/colortables/wrf_precip2.ctable";
+   plot_min         = 0.1;
+   plot_max         = 250.0;
+   colorbar_spacing = 10;
 }
 
 object_plot = {

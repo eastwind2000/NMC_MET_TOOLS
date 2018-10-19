@@ -6,6 +6,7 @@
 - Provide basic verification products for station and gridding observation.
 - Provide Object-Oriented space verifications products.
 - Experimental verification products for real-time QPF-operation in National Meteorological Center.
+- Numerical Models: ECMWF/GFS/WARMS/GRAPES/PWAFS
 - Python-based project running on Linux-platform.
 
 ### 1  Setup MET_TOOLS using docker-container or local-compiled programms

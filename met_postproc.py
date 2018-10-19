@@ -9,11 +9,10 @@ import pandas as pd
 
 import pdb
 
-from global_vars_linux import *
+import  global_vars_linux as gv
 
 
 #############################################################
-
 
 
 
@@ -69,26 +68,26 @@ def met_postproc_mode(cdate_utc):  # post-progressing for MODE verification prod
 
             for kth in range(8):  # every
 
-                mode_ps_fname = result_dir + model_name + "/" + cdate_utc + "/" +  \
+                mode_ps_fname = gv.result_dir + model_name + "/" + cdate_utc + "/" +  \
                                 "mode_" + mode_prefix[model_name] + "_" + str(vhr) + "0000L_" +  \
                                 cdate_utc[0:8] + "_" + cdate_utc[8:10] + "0000V_240000A_" \
                                 + "R" + str(kth+1) + "_T" + str(kth+1) + ".ps"
 
-                mode_png_00p = result_dir + model_name + "/" + cdate_utc + "/" + \
+                mode_png_00p = gv.result_dir + model_name + "/" + cdate_utc + "/" + \
                                  "mode_" + mode_prefix[model_name] + "_" + str(vhr).zfill(3) + "_" + \
                                 cdate_utc + "_RT_" + str(kth).zfill(2) + "_00p" + ".png"
 
-                mode_png_04p = result_dir + model_name + "/" + cdate_utc + "/" + \
+                mode_png_04p = gv.result_dir + model_name + "/" + cdate_utc + "/" + \
                                "mode_" + mode_prefix[model_name] + "_" + str(vhr).zfill(3) + "_" + \
                                 cdate_utc + "_RT_" + str(kth).zfill(2) + "_01p" + ".png"
 
-                mode_png_des = result_dir + model_name + "/" + cdate_utc + "/" + \
+                mode_png_des = gv.result_dir + model_name + "/" + cdate_utc + "/" + \
                                "mode_" + mode_prefix[model_name] + "_" + str(vhr).zfill(3) + "_" + \
                                 cdate_utc + "_RT_" + str(kth).zfill(2) + "_fin" + ".png"
 
                 cmd = "convert -density 240 " + mode_ps_fname + "[0] " + mode_png_00p + " ; " + \
                       "convert -density 240 " + mode_ps_fname + "[4] " + mode_png_04p + " ; " + \
-                      "convert -append " + mode_png_00p  + " "+ mode_png_04p + " " + mode_png_des
+                      "convert -append " + mode_png_00p + " " + mode_png_04p + " " + mode_png_des
 
                 print(cmd)
 
@@ -99,16 +98,9 @@ def met_postproc_mode(cdate_utc):  # post-progressing for MODE verification prod
 
 
 
-
-
-
-
-
-
     return
 
 #############################################################
-
 
 
 
@@ -138,12 +130,9 @@ def met_postproc_poinstat(cdate_utc):
     print(" =================================== ")
     print
 
-    for model_name in model_dir:
+    for model_name in gv.model_dir:
 
-        if(model_name=="ecmwf" or model_name=="gfs" or model_name=="eceps"):
-            fcst_length = 84
-        elif(model_name == "warms"):
-            fcst_length = 48
+        fcst_length = gv.model_fcst_length[model_name]
 
         for vhr in arange(24, fcst_length+12, 12):  # [24, 36, 48, 60, 72, 84]
 
@@ -167,7 +156,7 @@ def met_postproc_poinstat(cdate_utc):
 
         #    /home/vgdisk02/fcst2018/MET_RESULT/ecmwf/2018062300/point_stat_ECMWF_M4_360000L_20180623_000000V_cts.txt*
 
-            f_ps_name = result_dir + model_name + "//" + valid_cdate + "//" + \
+            f_ps_name = gv.result_dir + model_name + "//" + valid_cdate + "//" + \
                         "point_stat_" + model_name.upper() + "_M4_" + \
                         str(vhr) + "0000L_" + valid_cdate[0:8] + "_" + valid_cdate[8:10] + "0000V" + \
                         "_cts.txt"
@@ -177,7 +166,7 @@ def met_postproc_poinstat(cdate_utc):
             try:
                 ps_data = pd.read_csv(f_ps_name, sep="\s+", na_values="NA")
             except:
-                print( " File " + f_ps_name + " Error !")
+                print(" File " + f_ps_name + " Error !")
                 return
 
             scores = ["ACC", "FBIAS", "PODY", "POFD", "FAR", "CSI", "GSS", "HSS"]
@@ -185,7 +174,6 @@ def met_postproc_poinstat(cdate_utc):
             col_labels = ps_data["FCST_THRESH"][0:10]
 
             tabledata = ps_data[scores][0:10]  # 10 for cols, 8 for rows
-
 
             # irow = 0
             # for irow in range(10):
@@ -201,8 +189,6 @@ def met_postproc_poinstat(cdate_utc):
             # ax = figure(1,figsize=(8, 10))
 
             ax[0].bar(arange(10), tabledata["CSI"], width=0.5, color="darkblue")
-
-            # pdb.set_trace()
 
             for k in arange(10):
 
@@ -227,12 +213,10 @@ def met_postproc_poinstat(cdate_utc):
 
             ax[0].set_xticklabels(col_labels, fontsize=10)
 
-            ax[0].set_title( model_name.upper() + " CSI(TS) " + init_cdate + " + " + str(vhr).zfill(3) +  \
-                             "hr   " + valid_cdate,    fontsize=15)
+            ax[0].set_title( model_name.upper() + " CSI(TS) " + init_cdate + " + " + str(vhr).zfill(3) + \
+                             "hr   " + valid_cdate, fontsize=15)
 
             ax[1].axis("off")
-
-            # pdb.set_trace()
 
             # tempvar = np.array([round(x, 3) for x in tabledata.flatten()]).reshape(8, 10)
 
@@ -252,9 +236,6 @@ def met_postproc_poinstat(cdate_utc):
             #
             # plt.show()
 
-            plt.savefig(result_dir + model_name + "/"  + cdate_utc + "/./met_" + model_name + "_ps_cts_i" + init_cdate + "_v" + valid_cdate + "_" + str(vhr).zfill(3) + ".png")
+            plt.savefig( gv.result_dir + model_name + "/" + cdate_utc + "/./met_" + model_name + "_ps_cts_i" + init_cdate + "_v" + valid_cdate + "_" + str(vhr).zfill(3) + ".png")
 
             close(fig)
-            #
-
-        # pdb.set_trace()
