@@ -17,12 +17,11 @@ from global_vars_linux import *
 
 from multiprocessing import Process
 
+#
 
 def met_cmd_exec( cmd  ):
     os.system(cmd)
 
-
-#
 
 # [1] Setting up obs-validate, basic variants
 
@@ -51,24 +50,13 @@ def met_cmd_exec( cmd  ):
 #                   "2018061700",
 #                   "2018061800",
 #                   "2018061900",
-#                   "2018062000",
-#                   "2018062100",
-#                   "2018062200",
-#                   "2018062300",
-#                   "2018062400",
-#                   "2018062500",
-#                   "2018062600",
-#                   "2018062700",
-#                   "2018062800",
-#                   "2018062900",
-#                   "2018063000",
-#                   "2018070100"]
+#                   "2018062000"]
 
 cdate_utc_list = ['']*120
 
-cdate_start = "2018070500"
+cdate_start = "2018082700"
 
-cdate_end   = "2017090100"
+cdate_end   = "2018090100"
 
 cyear = cdate_start[0:4]
 cmon = cdate_start[4:6]
@@ -81,13 +69,16 @@ t1 = datetime.datetime(int(cyear), int(cmon), int(cday), int(chour))
 
 # create cdate list
 
-for iday in range(5):
+for iday in range(45):
 
     t2 = t1 + datetime.timedelta(hours=24*iday)
 
     cdate_utc_list[iday] = t2.strftime("%Y%m%d%H")
 
     print(cdate_utc_list[iday])
+
+###################################################
+
 
 for cdate_utc in cdate_utc_list:
 
@@ -205,15 +196,13 @@ for cdate_utc in cdate_utc_list:
             # [6] call MET_TOOLS commands for precipitation verification
 
 
-            cmd = "point_stat " + fcst_file + " " + m4_obs_file  + \
-                                 " config_pointstat_" + model_name + ".h" + " -outdir " + desdir
-            print
-            print(cmd)
-
-            # pdb.set_trace()
-            px = Process(target=met_cmd_exec, args=(cmd, ))
-            px.start()
-            print("=" * 40)
+            # cmd = "point_stat " + fcst_file + " " + m4_obs_file  + \
+            #                      " config_pointstat_" + model_name + ".h" + " -outdir " + desdir
+            # print
+            # print(cmd)
+            # px = Process(target=met_cmd_exec, args=(cmd, ))
+            # px.start()
+            # print("=" * 40)
 
 
             cmd = "grid_stat " + fcst_file + " " + qpe_obs_file + \
@@ -232,6 +221,7 @@ for cdate_utc in cdate_utc_list:
             px = Process(target=met_cmd_exec, args=(cmd, ))
             px.start()
 
+
             # print("=" * 40)
             # cmd = "wavelet_stat " + fcst_file + " " + qpe_obs_file + " config_wavelet_" + model + ".h"
             # print
@@ -239,6 +229,7 @@ for cdate_utc in cdate_utc_list:
             # os.system(cmd)
             # os.system(" mv  wavelet_* " + desdir)
             # print("=" * 40)
+
 
             if (model_name == "eceps"):
                 eps_fcst_files = "../MET_RESULT/eceps_r24_ens*_" + cdate_initnwp + "_f" + str(vhr).zfill(3) + ".nc"
@@ -273,12 +264,14 @@ for cdate_utc in cdate_utc_list:
 
 
 
-
     ###############################################
+
 
     # [7.0] Setting up MET_postproc
 
+
     met_postproc_poinstat(cdate_utc)  # post_progress for met output
+
 
     # met_postproc_mode(cdate_utc)
 

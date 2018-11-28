@@ -9,15 +9,45 @@ import pandas as pd
 
 import pdb
 
-import  global_vars_linux as gv
+
+import global_vars_linux as gv
+
 
 
 #############################################################
 
+cmd = "find " + gv.result_dir + " -name \"*.stat\" "
+
+print(cmd)
+
+cmdbufr = os.popen(cmd).readlines()
+
+for item in cmdbufr:
+
+    cmd = "ln -s " + item.strip("\n") + "  " + gv.result_dir + "./workdir"
+
+    os.system(cmd)
+
+    print(cmd)
+
+
+###############################################################################################
+
+def met_postproc_state_analysis():
+
+    cmd = "find " + gv.result_dir + " -name \"*.stat\" "
+
+    print(cmd)
+
+    cmdbufr = os.popen(cmd).split()
+
+    print(cmdbufr)
+
+    return
 
 
 
-def met_postproc_gridstat(cdate_utc):    # post-progressing for grid_stat verification products
+def met_postproc_gridstat(cdate_utc):   # post-progressing for grid_stat verification products
 
 
 
@@ -103,8 +133,6 @@ def met_postproc_mode(cdate_utc):  # post-progressing for MODE verification prod
 #############################################################
 
 
-
-
 #############################################################
 
 
@@ -188,7 +216,7 @@ def met_postproc_poinstat(cdate_utc):
 
             # ax = figure(1,figsize=(8, 10))
 
-            ax[0].bar(arange(10), tabledata["CSI"], width=0.5, color="darkblue")
+            ax[0].bar(arange(10), tabledata["CSI"], width=0.5, color="darkblue")  # barplot for CSI scores.
 
             for k in arange(10):
 
@@ -239,3 +267,8 @@ def met_postproc_poinstat(cdate_utc):
             plt.savefig( gv.result_dir + model_name + "/" + cdate_utc + "/./met_" + model_name + "_ps_cts_i" + init_cdate + "_v" + valid_cdate + "_" + str(vhr).zfill(3) + ".png")
 
             close(fig)
+
+# met_postproc_state_analysis()
+
+
+

@@ -15,7 +15,7 @@ def setup_micaps_r24obs( cdate_utc, cdate_lst  ):
 
     # micaps_r24_dir = "H:\\fcst2018\\micaps\\r24\\"
 
-    surobs = np.loadtxt("sta2513.c8", usecols=(0, 1, 2, 3))  # stations list for verification
+    surobs = np.loadtxt("../resource/sta2513.c8", usecols=(0, 1, 2, 3))  # stations list for verification
 
     r24fname = cdate_lst[2::] + ".000"
 

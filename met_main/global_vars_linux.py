@@ -64,16 +64,17 @@ use_pwafs15 = True
 
 use_pwafs03 = True
 
-
 ## result directory structure
+
 
 result_dir = proj_home + "../MET_RESULT/"
 
+
 # model_dir = ["ecmwf", "gfs", "warms", "pwafs"]
 
-model_dir = ["ecmwf", "gfs", "warms", "pwafs15", "pwafs03", "eceps"]
+# model_dir = ["ecmwf", "gfs", "warms", "pwafs15", "pwafs03"]
 
-# model_dir = ["pwafs03"]
+model_dir = ["ecmwf", "warms", "pwafs03"]
 
 
 mode_prefix = {"ecmwf": "EC_CMORPH",
