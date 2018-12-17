@@ -24,14 +24,28 @@ cmdbufr = os.popen(cmd).readlines()
 
 for item in cmdbufr:
 
-    cmd = "ln -s " + item.strip("\n") + "  " + gv.result_dir + "./workdir"
+    cmd = "cp " + item.strip("\n") + "  " + gv.result_dir + "./workdir"
 
-    os.system(cmd)
+    # os.system(cmd)
 
     print(cmd)
 
+###############################################################################################
+
+
+cmd_stat_analysis = "stat_analysis -lookin /home/lse/vgdisk02/fcst2018/MET_RESULT/workdir/                  \
+                                   -job aggregate_stat                                                      \
+                                   -line_type CTC                                                           \
+                                   -out_line_type CTS                                                       \
+                                   -fcst_lead 360000 -obtype ADPSFC -interp_mthd MEDIAN_SQUARE              \
+                                   -fcst_thresh \">=25\" -obs_thresh \">=25\"                               \
+                                   -dump_row test.out "
+
+
+os.system(cmd_stat_analysis)
 
 ###############################################################################################
+
 
 def met_postproc_state_analysis():
 

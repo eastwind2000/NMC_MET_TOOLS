@@ -52,9 +52,9 @@ def met_cmd_exec( cmd  ):
 #                   "2018061900",
 #                   "2018062000"]
 
-cdate_utc_list = ['']*120
+cdate_utc_list = ['']*125
 
-cdate_start = "2018082700"
+cdate_start = "2018050100"
 
 cdate_end   = "2018090100"
 
@@ -69,7 +69,7 @@ t1 = datetime.datetime(int(cyear), int(cmon), int(cday), int(chour))
 
 # create cdate list
 
-for iday in range(45):
+for iday in range(125):
 
     t2 = t1 + datetime.timedelta(hours=24*iday)
 
@@ -196,13 +196,13 @@ for cdate_utc in cdate_utc_list:
             # [6] call MET_TOOLS commands for precipitation verification
 
 
-            # cmd = "point_stat " + fcst_file + " " + m4_obs_file  + \
-            #                      " config_pointstat_" + model_name + ".h" + " -outdir " + desdir
-            # print
-            # print(cmd)
-            # px = Process(target=met_cmd_exec, args=(cmd, ))
-            # px.start()
-            # print("=" * 40)
+            cmd = "point_stat " + fcst_file + " " + m4_obs_file  + \
+                                 " config_pointstat_" + model_name + ".h" + " -outdir " + desdir
+            print
+            print(cmd)
+            px = Process(target=met_cmd_exec, args=(cmd, ))
+            px.start()
+            print("=" * 40)
 
 
             cmd = "grid_stat " + fcst_file + " " + qpe_obs_file + \

@@ -10,10 +10,6 @@ import pandas as pd
 import pdb
 
 
-import global_vars_linux as gv
-
-
-
 
 
 
@@ -32,7 +28,6 @@ def met_postproc_state_analysis():
 
 
 def met_postproc_gridstat(cdate_utc):    # post-progressing for grid_stat verification products
-
 
 
 

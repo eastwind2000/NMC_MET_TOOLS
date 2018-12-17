@@ -2,45 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7b26593-aa50-4093-a81b-2cd04f37bb1b" name="Default" comment="update">
-      <change afterPath="$PROJECT_DIR$/resource/material_design_color.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postproc/postproc_lib.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/China_boundary.nc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/China_boundary.poly" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/china.poly" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_ensemblestat_eceps.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_gridstat_ecmwf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_gridstat_gfs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_gridstat_pwafs03.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_gridstat_pwafs15.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_gridstat_warms.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_mode_ecmwf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_mode_gfs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_mode_pwafs03.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_mode_pwafs15.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_mode_warms.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_pointstat_ecmwf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_pointstat_gfs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_pointstat_pwafs03.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_pointstat_pwafs15.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_pointstat_warms.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_wavelet_ecmwf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_wavelet_gfs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_wavelet_warms.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/global_vars_linux.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/global_vars_win.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/met_gfs_prep.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/met_main_process.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/met_postproc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/met_setup_fcst.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/met_setup_obs_micaps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/met_setup_obs_qpe.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mp_wget_gfsdata.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mp_wget_gfsobs.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nasa-gibs-service.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/serial_getec_imdata.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup_china_poly.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sta2513.c8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wget_gfsdata.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/met_main/global_vars_linux.py" beforeDir="false" afterPath="$PROJECT_DIR$/met_main/global_vars_linux.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/met_main/met_main_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/met_main/met_main_process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/met_main/met_postproc.py" beforeDir="false" afterPath="$PROJECT_DIR$/met_main/met_postproc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postproc/met_postproc.py" beforeDir="false" afterPath="$PROJECT_DIR$/postproc/met_postproc.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -158,27 +125,28 @@
     <session id="-1616941270">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
     </session>
     <session id="-173668593">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="19" />
+          <entry key="project.closed" value="20" />
           <entry key="project.open.time.10" value="4" />
           <entry key="project.open.time.12" value="2" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="2" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="2" />
-          <entry key="project.open.time.17" value="1" />
+          <entry key="project.open.time.17" value="2" />
           <entry key="project.open.time.18" value="4" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.20" value="2" />
           <entry key="project.open.time.22" value="2" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.24" value="1" />
@@ -190,35 +158,37 @@
           <entry key="project.open.time.6" value="5" />
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="37" />
+          <entry key="project.opened" value="39" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="0" value="1" />
           <entry key="R" value="1" />
           <entry key="bak20180722" value="2" />
           <entry key="dat" value="1" />
-          <entry key="h" value="82" />
+          <entry key="h" value="89" />
           <entry key="md" value="1" />
           <entry key="png" value="2" />
-          <entry key="py" value="66" />
-          <entry key="xml" value="1" />
+          <entry key="py" value="71" />
+          <entry key="xml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="C++" value="82" />
+          <entry key="C++" value="89" />
           <entry key="Image" value="2" />
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="66" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Python" value="71" />
           <entry key="R" value="1" />
-          <entry key="XML" value="1" />
+          <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="911" />
+          <entry key="0" value="1" />
+          <entry key="Python Console" value="912" />
           <entry key="global_vars_linux" value="504" />
           <entry key="h" value="545" />
           <entry key="md" value="76" />
@@ -226,7 +196,7 @@
           <entry key="met_get_csi_2" value="830" />
           <entry key="met_main_process" value="498" />
           <entry key="met_postproc" value="92" />
-          <entry key="py" value="11744" />
+          <entry key="py" value="12753" />
           <entry key="xml" value="31" />
         </counts>
       </usages-collector>
@@ -234,7 +204,8 @@
         <counts>
           <entry key="C++" value="545" />
           <entry key="Markdown" value="76" />
-          <entry key="Python" value="15604" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="16614" />
           <entry key="XML" value="31" />
         </counts>
       </usages-collector>
@@ -244,20 +215,37 @@
     <favorites_list name="NMC_MET_TOOLS" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/postproc/met_postproc.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="26" column="66" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="66" />
-              <folding>
-                <element signature="e#24#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/met_main/met_postproc.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="400">
+                  <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+                  <folding>
+                    <element signature="e#24#43#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/met_main/global_vars_linux.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="576">
+                  <caret line="79" selection-start-line="79" selection-end-line="80" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -292,7 +280,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/met_gfs_prep.py" />
         <option value="$PROJECT_DIR$/met_workplan.md" />
         <option value="$PROJECT_DIR$/setup_china_poly.py" />
         <option value="$PROJECT_DIR$/nasa-gibs-service.py" />
@@ -327,7 +314,7 @@
         <option value="$PROJECT_DIR$/config_pointstat_pwafs03.h" />
         <option value="$PROJECT_DIR$/config_gridstat_pwafs03.h" />
         <option value="$PROJECT_DIR$/config_mode_pwafs03.h" />
-        <option value="$PROJECT_DIR$/../../datamusic/surdata_mins_MusicPortal.py" />
+        <option value="E:/datamusic/surdata_mins_MusicPortal.py" />
         <option value="$PROJECT_DIR$/resource/material_design_color.xml" />
         <option value="$PROJECT_DIR$/met_main_process.py" />
         <option value="$PROJECT_DIR$/config_mode_ecmwf.h" />
@@ -337,17 +324,19 @@
         <option value="$PROJECT_DIR$/main/met_main_process.py" />
         <option value="$PROJECT_DIR$/main/met_postproc.py" />
         <option value="$PROJECT_DIR$/main/met_setup_obs_micaps.py" />
-        <option value="$PROJECT_DIR$/met_main/met_main_process.py" />
         <option value="$PROJECT_DIR$/met_main/config_ensemblestat_eceps.h" />
         <option value="$PROJECT_DIR$/postproc/met_postproc.py" />
+        <option value="$PROJECT_DIR$/met_main/global_vars_linux.py" />
+        <option value="$PROJECT_DIR$/met_main/met_main_process.py" />
+        <option value="$PROJECT_DIR$/postproc/=25.0" />
+        <option value="$PROJECT_DIR$/met_main/met_postproc.py" />
+        <option value="$PROJECT_DIR$/postproc/postproc_lib.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="8" />
-    <option name="y" value="31" />
-    <option name="width" value="2558" />
-    <option name="height" value="1368" />
+    <option name="width" value="2560" />
+    <option name="height" value="1377" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -358,7 +347,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -366,20 +354,16 @@
               <item name="NMC_MET_TOOLS" type="b2602c69:ProjectViewProjectNode" />
               <item name="NMC_MET_TOOLS" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="NMC_MET_TOOLS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NMC_MET_TOOLS" type="462c0819:PsiDirectoryNode" />
-              <item name="postproc" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://H:/fcst2018/NMC_MET_TOOLS/global_vars.py" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../datamusic/surdata_mins_MusicPortal.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../QPF_ALG/qpf_blender_prototype" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -408,7 +392,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.met_postproc">
+  <component name="RunManager" selected="Python.postproc_lib">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="NMC_MET_TOOLS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -422,48 +406,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="global_vars_linux (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="NMC_MET_TOOLS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="D:\Anaconda2\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/met_main" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/met_main/global_vars_linux.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="met_main_process (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="NMC_MET_TOOLS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="D:\Anaconda2\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/main" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main/met_main_process.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -493,10 +435,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="met_postproc (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="NMC_MET_TOOLS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Anaconda2\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/met_main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/met_main/met_postproc.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="met_postproc" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="NMC_MET_TOOLS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="D:\Anaconda2\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/postproc" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -532,20 +498,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="postproc_lib" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="NMC_MET_TOOLS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\Anaconda2\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/postproc" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/postproc/postproc_lib.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.met_main_process (1)" />
-      <item itemvalue="Python.global_vars_linux (1)" />
       <item itemvalue="Python.met_setup_obs_qpe" />
       <item itemvalue="Python.met_main_process" />
       <item itemvalue="Python.met_postproc" />
+      <item itemvalue="Python.met_postproc (1)" />
+      <item itemvalue="Python.postproc_lib" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.postproc_lib" />
+        <item itemvalue="Python.met_postproc (1)" />
         <item itemvalue="Python.met_postproc" />
         <item itemvalue="Python.met_main_process" />
         <item itemvalue="Python.met_setup_obs_qpe" />
-        <item itemvalue="Python.global_vars_linux (1)" />
-        <item itemvalue="Python.met_main_process (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -597,10 +584,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="31" width="2558" height="1368" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="0" width="2560" height="1377" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49608064" visible="true" weight="0.15381558" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49608064" visible="true" weight="0.15582871" />
       <window_info id="Structure" order="1" sideWeight="0.50391936" side_tool="true" weight="0.09769659" />
       <window_info id="Favorites" order="2" sideWeight="0.50391936" side_tool="true" weight="0.09769659" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -611,7 +597,7 @@
       <window_info anchor="bottom" id="TODO" order="5" weight="0.3294025" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50633484" side_tool="true" weight="0.3058176" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32616824" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="8" sideWeight="0.49366516" visible="true" weight="0.31603774" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="8" sideWeight="0.49366516" visible="true" weight="0.31351793" />
       <window_info anchor="bottom" id="Run" order="9" sideWeight="0.49978876" weight="0.37421384" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4982729" weight="0.39937106" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -694,23 +680,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config_wavelet_warms.h" />
-    <entry file="file://$PROJECT_DIR$/config_wavelet_ecmwf.h" />
-    <entry file="file://$PROJECT_DIR$/config_wavelet_gfs.h" />
-    <entry file="file://$PROJECT_DIR$/test_pwafs.png" />
-    <entry file="file://$PROJECT_DIR$/test_pwafs15.png" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="192">
-            <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mp_wget_gfsobs.py" />
-    <entry file="file://$PROJECT_DIR$/nasa-gibs-service.py" />
     <entry file="file://$PROJECT_DIR$/config_pointstat_ecmwf.h" />
     <entry file="file://$PROJECT_DIR$/config_pointstat_gfs.h" />
     <entry file="file://$PROJECT_DIR$/config_pointstat_warms.h" />
@@ -725,22 +694,9 @@
     <entry file="file://$PROJECT_DIR$/config_mode_pwafs03.h" />
     <entry file="file://$PROJECT_DIR$/config_gridstat_pwafs03.h" />
     <entry file="file://$PROJECT_DIR$/config_gridstat_pwafs15.h" />
-    <entry file="file://$PROJECT_DIR$/../../datamusic/surdata_mins_MusicPortal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://E:/datamusic/surdata_mins_MusicPortal.py" />
     <entry file="file://$PROJECT_DIR$/met_setup_fcst.py" />
     <entry file="file://$PROJECT_DIR$/config_ensemblestat_eceps.h" />
-    <entry file="file://$PROJECT_DIR$/resource/material_design_color.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config_mode_gfs.h" />
     <entry file="file://$PROJECT_DIR$/config_gridstat_ecmwf.h" />
     <entry file="file://$PROJECT_DIR$/config_mode_ecmwf.h" />
@@ -753,13 +709,6 @@
     <entry file="file://$PROJECT_DIR$/main/met_setup_obs_qpe.py" />
     <entry file="file://$PROJECT_DIR$/main/met_main_process.py" />
     <entry file="file://$PROJECT_DIR$/main/met_setup_obs_micaps.py" />
-    <entry file="file://$PROJECT_DIR$/met_main/met_postproc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="19" column="34" lean-forward="true" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/met_main/met_setup_fcst.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -769,26 +718,13 @@
     <entry file="file://$PROJECT_DIR$/met_main/global_vars_win.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/met_main/global_vars_linux.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/met_main/met_setup_obs_qpe.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/met_main/config_gridstat_ecmwf.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/met_main/config_ensemblestat_eceps.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/met_main/met_main_process.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-877">
-          <caret line="175" column="39" lean-forward="true" selection-start-line="175" selection-start-column="39" selection-end-line="175" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -802,13 +738,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/postproc/global_vars_linux.py">
+    <entry file="file://$PROJECT_DIR$/postproc/global_vars_linux.py" />
+    <entry file="file://$PROJECT_DIR$/met_main/config_pointstat_pwafs15.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/postproc/met_postproc.py">
+    <entry file="file://$PROJECT_DIR$/met_main/config_mode_warms.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="26" column="66" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="66" />
+        <state relative-caret-position="-3096">
+          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/met_main/config_pointstat_ecmwf.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1981">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/met_main/config_wavelet_ecmwf.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1717">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/met_main/config_gridstat_ecmwf.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1176">
+          <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/met_main/config_pointstat_gfs.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4453" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/met_main/config_wavelet_warms.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/postproc/=25.0" />
+    <entry file="file://$PROJECT_DIR$/met_main/met_main_process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/postproc/met_postproc.py" />
+    <entry file="file://$PROJECT_DIR$/resource/material_design_color.xml" />
+    <entry file="file://$PROJECT_DIR$/postproc/postproc_lib.py" />
+    <entry file="file://$PROJECT_DIR$/met_main/global_vars_linux.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="79" selection-start-line="79" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/met_main/met_postproc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="e#24#43#0" expanded="true" />
           </folding>

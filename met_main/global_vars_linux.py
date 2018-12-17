@@ -74,7 +74,7 @@ result_dir = proj_home + "../MET_RESULT/"
 
 # model_dir = ["ecmwf", "gfs", "warms", "pwafs15", "pwafs03"]
 
-model_dir = ["ecmwf", "warms", "pwafs03"]
+model_dir = ["ecmwf", "gfs", "warms", "pwafs03"]
 
 
 mode_prefix = {"ecmwf": "EC_CMORPH",
@@ -83,13 +83,6 @@ mode_prefix = {"ecmwf": "EC_CMORPH",
                "pwafs15:": "PWAFS15_CMORPH",
                "pwafs03:": "PWAFS03_CMORPH",
                "eceps": "ECEPS_CMORPH"}
-
-
-# model_fcst_length = {"ecmwf": 84,
-#                      "eceps": 84,
-#                      "gfs": 84,
-#                      "warms": 48,
-#                      "pwafs": 72 }
 
 
 model_fcst_length = {"ecmwf": 84,
